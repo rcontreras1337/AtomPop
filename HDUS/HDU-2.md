@@ -312,6 +312,34 @@ describe('useConverter', () => {
 
 ---
 
+### TICKET 2.7: Tests E2E del Conversor
+**Tipo:** Testing E2E  
+**Archivo(s):** `cypress/e2e/hdu-2-converter.cy.ts`
+
+**Escenarios a probar:**
+- [ ] Página carga correctamente
+- [ ] Ingresar fórmula válida muestra masa molar
+- [ ] Escribir en moles actualiza gramos y partículas
+- [ ] Escribir en gramos actualiza moles y partículas
+- [ ] Escribir en partículas actualiza moles y gramos
+- [ ] Notación científica se muestra correctamente
+- [ ] No permite valores negativos
+- [ ] Limpiar campos funciona
+- [ ] Responsive en móvil y tablet
+
+**Ejecución:**
+```bash
+npm run e2e  # Abre Cypress UI (no headless)
+```
+
+**Definición de Hecho:**
+```
+✓ Todos los tests E2E del conversor pasan
+✓ El conversor funciona en todos los viewports
+```
+
+---
+
 ## ✅ Checklist Final HDU-2
 
 - [ ] TICKET 2.1 completado
@@ -319,13 +347,15 @@ describe('useConverter', () => {
 - [ ] TICKET 2.3 completado
 - [ ] TICKET 2.4 completado
 - [ ] TICKET 2.5 completado
-- [ ] **TICKET 2.6 completado (Tests)**
+- [ ] **TICKET 2.6 completado (Tests Unitarios)**
+- [ ] **TICKET 2.7 completado (Tests E2E)**
 - [ ] Conversiones son precisas (verificar con calculadora)
 - [ ] Notación científica funciona correctamente
 - [ ] Página accesible desde navegación
 - [ ] Funciona en móvil
 - [ ] Sin errores en consola
 - [ ] Todos los tests pasan (`npm run test:run`)
+- [ ] Tests E2E pasan (`npm run e2e`)
 - [ ] CHANGELOG.md actualizado
 - [ ] Versión actualizada a `0.3.0`
 - [ ] Commit realizado con tag `v0.3.0`

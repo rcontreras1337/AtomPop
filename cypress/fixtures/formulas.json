@@ -1,0 +1,17 @@
+{
+  "valid": [
+    { "formula": "H2O", "expectedMass": "18.015", "name": "Agua" },
+    { "formula": "NaCl", "expectedMass": "58.44", "name": "Sal" },
+    { "formula": "CO2", "expectedMass": "44.009", "name": "Dióxido de Carbono" },
+    { "formula": "H2SO4", "expectedMass": "98.079", "name": "Ácido Sulfúrico" },
+    { "formula": "C6H12O6", "expectedMass": "180.156", "name": "Glucosa" },
+    { "formula": "Ca(OH)2", "expectedMass": "74.093", "name": "Hidróxido de Calcio" },
+    { "formula": "Fe2O3", "expectedMass": "159.687", "name": "Óxido de Hierro" }
+  ],
+  "invalid": [
+    { "formula": "XyZ", "error": "no existe" },
+    { "formula": "H2O(", "error": "paréntesis" },
+    { "formula": "123", "error": "inválid" }
+  ]
+}
+

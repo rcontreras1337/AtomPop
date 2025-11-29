@@ -22,3 +22,18 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Cypress
+cypress/videos
+cypress/screenshots
+cypress/downloads
+
+# Cursor AI (reglas locales - no subir al repo)
+.cursorrules
+
+# Secrets y configuración local
+.env
+.env.local
+.env.*.local
+*.pem
+*.key

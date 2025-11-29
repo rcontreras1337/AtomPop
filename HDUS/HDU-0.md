@@ -249,6 +249,32 @@ src/
 
 ---
 
+---
+
+### TICKET 0.7: Tests E2E de Navegación ✅
+**Tipo:** Testing E2E  
+**Archivo(s):** `cypress/e2e/hdu-0-navigation.cy.ts`
+
+**Escenarios probados:**
+- [x] Página de inicio carga correctamente
+- [x] Navegación entre todas las páginas funciona
+- [x] Botón "Volver al inicio" en cada página
+- [x] Responsive en desktop, tablet y móvil
+- [x] Menú móvil funciona
+
+**Ejecución:**
+```bash
+npm run e2e  # Abre Cypress UI (no headless)
+```
+
+**Definición de Hecho:**
+```
+✓ Todos los tests E2E de navegación pasan
+✓ La navegación funciona en todos los viewports
+```
+
+---
+
 ## ✅ Checklist Final HDU-0
 
 - [x] TICKET 0.1 completado (React Router)
@@ -257,6 +283,7 @@ src/
 - [x] TICKET 0.4 completado (Hook usePeriodicTable)
 - [x] TICKET 0.5 completado (Componentes UI)
 - [x] TICKET 0.6 completado (Motor de Cálculo)
+- [x] TICKET 0.7 completado (Tests E2E navegación)
 - [x] Tests unitarios creados (83 tests)
 - [x] Todos los tests pasan
 - [x] Todos los archivos commiteados
@@ -272,6 +299,7 @@ src/
 | Archivos creados | 23 |
 | Líneas de código | ~2,700 |
 | Tests unitarios | 83 |
+| Tests E2E | 15+ |
 | Tests pasando | 100% |
 | Elementos en tabla | 74 |
 | Componentes UI | 4 |

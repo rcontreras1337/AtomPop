@@ -1,0 +1,49 @@
+# GitHub Actions - AtomPop CI Pipeline
+# Solo ejecuta build y tests unitarios
+# El deploy lo maneja Vercel automáticamente
+
+name: CI - Build & Test
+
+on:
+  push:
+    branches: [main, 'feature/**']
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout código
+        uses: actions/checkout@v4
+
+      - name: 📦 Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📚 Instalar dependencias
+        run: npm ci
+
+      - name: 🔍 Lint
+        run: npm run lint
+
+      - name: 🧪 Ejecutar tests unitarios
+        run: npm run test:run
+
+      - name: 🏗️ Build de producción
+        run: npm run build
+
+      - name: ✅ Verificar build exitoso
+        run: |
+          if [ -d "dist" ]; then
+            echo "✅ Build exitoso - carpeta dist creada"
+            ls -la dist/
+          else
+            echo "❌ Error - carpeta dist no encontrada"
+            exit 1
+          fi
+

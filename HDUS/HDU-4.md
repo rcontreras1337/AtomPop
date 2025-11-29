@@ -374,6 +374,33 @@ describe('useMolecularFormula', () => {
 
 ---
 
+### TICKET 4.7: Tests E2E de Fórmula Empírica/Molecular
+**Tipo:** Testing E2E  
+**Archivo(s):** `cypress/e2e/hdu-4-empirical.cy.ts`
+
+**Escenarios a probar:**
+- [ ] Página carga correctamente
+- [ ] Cambiar entre modo Empírica y Molecular
+- [ ] Agregar/eliminar filas de elementos funciona
+- [ ] Calcular fórmula empírica desde porcentajes
+- [ ] Mostrar pasos del cálculo
+- [ ] Calcular fórmula molecular desde empírica
+- [ ] Validación de datos funciona
+- [ ] Responsive en móvil y tablet
+
+**Ejecución:**
+```bash
+npm run e2e  # Abre Cypress UI (no headless)
+```
+
+**Definición de Hecho:**
+```
+✓ Todos los tests E2E de fórmula empírica/molecular pasan
+✓ Ambos modos funcionan en todos los viewports
+```
+
+---
+
 ## ✅ Checklist Final HDU-4
 
 - [ ] TICKET 4.1 completado
@@ -381,7 +408,8 @@ describe('useMolecularFormula', () => {
 - [ ] TICKET 4.3 completado
 - [ ] TICKET 4.4 completado
 - [ ] TICKET 4.5 completado
-- [ ] **TICKET 4.6 completado (Tests)**
+- [ ] **TICKET 4.6 completado (Tests Unitarios)**
+- [ ] **TICKET 4.7 completado (Tests E2E)**
 - [ ] Modo 1 (Empírica) funciona correctamente
 - [ ] Modo 2 (Molecular) funciona correctamente
 - [ ] Pasos son educativos y correctos
@@ -389,6 +417,7 @@ describe('useMolecularFormula', () => {
 - [ ] Funciona en móvil
 - [ ] Sin errores en consola
 - [ ] Todos los tests pasan (`npm run test:run`)
+- [ ] Tests E2E pasan (`npm run e2e`)
 - [ ] CHANGELOG.md actualizado
 - [ ] Versión actualizada a `0.5.0`
 - [ ] Commit realizado con tag `v0.5.0`

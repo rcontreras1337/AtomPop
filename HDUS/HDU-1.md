@@ -243,6 +243,35 @@ src/features/molar-mass/
 **Tipo:** Testing  
 **Archivo(s):** `src/features/molar-mass/useMolarMass.test.ts`, `src/features/molar-mass/MassBreakdown.test.tsx`
 
+---
+
+### TICKET 1.7: Tests E2E de Masa Molar ✅
+**Tipo:** Testing E2E  
+**Archivo(s):** `cypress/e2e/hdu-1-molar-mass.cy.ts`
+
+**Escenarios probados:**
+- [x] Página carga correctamente
+- [x] Calcular fórmulas válidas (H2O, NaCl, Ca(OH)2, etc.)
+- [x] Mostrar desglose por elemento
+- [x] Manejo de errores (fórmulas inválidas)
+- [x] Ejemplos clickeables funcionan
+- [x] Botón limpiar funciona
+- [x] Copiar resultado muestra feedback
+- [x] Historial de cálculos funciona
+- [x] Tecla Enter calcula
+- [x] Responsive en móvil y tablet
+
+**Ejecución:**
+```bash
+npm run e2e  # Abre Cypress UI (no headless)
+```
+
+**Definición de Hecho:**
+```
+✓ Todos los tests E2E de masa molar pasan
+✓ La calculadora funciona en todos los viewports
+```
+
 **Tests a crear:**
 
 #### Hook `useMolarMass`

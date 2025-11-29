@@ -86,7 +86,9 @@ La aplicación estará disponible en `http://localhost:5173`
 
 ## 🧪 Testing
 
-El proyecto incluye tests unitarios para el motor de cálculo químico.
+El proyecto incluye tests unitarios y tests E2E (end-to-end).
+
+### Tests Unitarios (Vitest)
 
 ```bash
 # Ejecutar tests una vez
@@ -99,7 +101,21 @@ npm test
 npm run test:coverage
 ```
 
+### Tests E2E (Cypress)
+
+```bash
+# Abrir Cypress UI (recomendado - NO headless)
+npm run e2e
+
+# Ejecutar en modo headless (para CI)
+npm run e2e:headless
+```
+
+> **Nota:** Los tests E2E requieren que el servidor de desarrollo esté corriendo (`npm run dev`)
+
 ### Cobertura de Tests
+
+#### Tests Unitarios (Vitest)
 
 | Archivo | Tests | Estado |
 |---------|-------|--------|
@@ -108,7 +124,15 @@ npm run test:coverage
 | `usePeriodicTable.ts` | 22 | ✅ |
 | `useMolarMass.ts` | 17 | ✅ |
 | `MassBreakdown.tsx` | 11 | ✅ |
-| **Total** | **111** | ✅ |
+| **Total Unitarios** | **111** | ✅ |
+
+#### Tests E2E (Cypress)
+
+| Suite | Escenarios | Estado |
+|-------|------------|--------|
+| `hdu-0-navigation.cy.ts` | Navegación, responsive, menú | ✅ |
+| `hdu-1-molar-mass.cy.ts` | Calculadora completa | ✅ |
+| **Total E2E** | **30+** | ✅ |
 
 ---
 
@@ -161,6 +185,8 @@ src/
 | `npm test` | Ejecuta tests en modo watch |
 | `npm run test:run` | Ejecuta tests una vez |
 | `npm run test:coverage` | Tests con reporte de cobertura |
+| `npm run e2e` | Abre Cypress UI para tests E2E |
+| `npm run e2e:headless` | Ejecuta tests E2E en modo headless |
 
 ---
 

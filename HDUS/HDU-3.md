@@ -281,13 +281,40 @@ describe('PieChart', () => {
 
 ---
 
+### TICKET 3.6: Tests E2E de Composición
+**Tipo:** Testing E2E  
+**Archivo(s):** `cypress/e2e/hdu-3-composition.cy.ts`
+
+**Escenarios a probar:**
+- [ ] Página carga correctamente
+- [ ] Ingresar fórmula muestra composición porcentual
+- [ ] Gráfico de torta se renderiza
+- [ ] Porcentajes suman 100%
+- [ ] Lista de elementos muestra datos correctos
+- [ ] Animaciones funcionan
+- [ ] Responsive en móvil y tablet
+
+**Ejecución:**
+```bash
+npm run e2e  # Abre Cypress UI (no headless)
+```
+
+**Definición de Hecho:**
+```
+✓ Todos los tests E2E de composición pasan
+✓ El gráfico se ve correctamente en todos los viewports
+```
+
+---
+
 ## ✅ Checklist Final HDU-3
 
 - [ ] TICKET 3.1 completado
 - [ ] TICKET 3.2 completado
 - [ ] TICKET 3.3 completado
 - [ ] TICKET 3.4 completado
-- [ ] **TICKET 3.5 completado (Tests)**
+- [ ] **TICKET 3.5 completado (Tests Unitarios)**
+- [ ] **TICKET 3.6 completado (Tests E2E)**
 - [ ] Porcentajes son matemáticamente correctos
 - [ ] Gráfico es visualmente atractivo
 - [ ] Animaciones funcionan bien
@@ -295,6 +322,7 @@ describe('PieChart', () => {
 - [ ] Funciona en móvil
 - [ ] Sin errores en consola
 - [ ] Todos los tests pasan (`npm run test:run`)
+- [ ] Tests E2E pasan (`npm run e2e`)
 - [ ] CHANGELOG.md actualizado
 - [ ] Versión actualizada a `0.4.0`
 - [ ] Commit realizado con tag `v0.4.0`

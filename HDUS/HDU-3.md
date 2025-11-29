@@ -3,7 +3,8 @@
 > **Prioridad:** 🟡 Media  
 > **Estado:** ⏳ Pendiente  
 > **Dependencias:** HDU-0 (completa), HDU-1 (recomendado)  
-> **Estimación:** 2-3 horas
+> **Estimación:** 2-3 horas  
+> **Versión:** `0.4.0` (MINOR)
 
 ---
 
@@ -246,17 +247,55 @@ src/features/composition/
 
 ---
 
+---
+
+## 🧪 Tests Requeridos
+
+### TICKET 3.5: Tests Unitarios
+**Tipo:** Testing  
+**Archivo(s):** `src/features/composition/useComposition.test.ts`, `src/features/composition/PieChart.test.tsx`
+
+**Tests a crear:**
+```typescript
+describe('useComposition', () => {
+  it('debe calcular porcentajes correctamente');
+  it('debe sumar 100% (con tolerancia de redondeo)');
+  it('debe ordenar por porcentaje descendente');
+  it('debe incluir colores CPK');
+  it('debe manejar fórmulas inválidas');
+});
+
+describe('PieChart', () => {
+  it('debe renderizar segmentos para cada elemento');
+  it('debe aplicar colores correctos');
+  it('debe manejar datos vacíos');
+});
+```
+
+**Definición de Hecho:**
+```
+✓ Mínimo 8 tests creados
+✓ Todos los tests pasan
+✓ Cobertura > 80% para archivos nuevos
+```
+
+---
+
 ## ✅ Checklist Final HDU-3
 
 - [ ] TICKET 3.1 completado
 - [ ] TICKET 3.2 completado
 - [ ] TICKET 3.3 completado
 - [ ] TICKET 3.4 completado
+- [ ] **TICKET 3.5 completado (Tests)**
 - [ ] Porcentajes son matemáticamente correctos
 - [ ] Gráfico es visualmente atractivo
 - [ ] Animaciones funcionan bien
 - [ ] Página accesible desde navegación
 - [ ] Funciona en móvil
 - [ ] Sin errores en consola
-- [ ] Commit realizado
+- [ ] Todos los tests pasan (`npm run test:run`)
+- [ ] CHANGELOG.md actualizado
+- [ ] Versión actualizada a `0.4.0`
+- [ ] Commit realizado con tag `v0.4.0`
 

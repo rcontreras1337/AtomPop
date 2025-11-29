@@ -3,7 +3,8 @@
 > **Prioridad:** 🔴 Alta  
 > **Estado:** ⏳ Pendiente  
 > **Dependencias:** HDU-0 (completa)  
-> **Estimación:** 3-4 horas
+> **Estimación:** 3-4 horas  
+> **Versión:** `0.3.0` (MINOR)
 
 ---
 
@@ -280,6 +281,37 @@ src/features/converter/
 
 ---
 
+---
+
+## 🧪 Tests Requeridos
+
+### TICKET 2.6: Tests Unitarios
+**Tipo:** Testing  
+**Archivo(s):** `src/features/converter/useConverter.test.ts`
+
+**Tests a crear:**
+```typescript
+describe('useConverter', () => {
+  it('debe inicializar con valores vacíos');
+  it('debe calcular moles desde gramos correctamente');
+  it('debe calcular gramos desde moles correctamente');
+  it('debe calcular partículas desde moles');
+  it('debe actualizar campos relacionados automáticamente');
+  it('debe manejar fórmulas inválidas');
+  it('debe formatear notación científica correctamente');
+  it('debe prevenir valores negativos');
+});
+```
+
+**Definición de Hecho:**
+```
+✓ Mínimo 8 tests creados
+✓ Todos los tests pasan
+✓ Cobertura > 80% para archivos nuevos
+```
+
+---
+
 ## ✅ Checklist Final HDU-2
 
 - [ ] TICKET 2.1 completado
@@ -287,10 +319,14 @@ src/features/converter/
 - [ ] TICKET 2.3 completado
 - [ ] TICKET 2.4 completado
 - [ ] TICKET 2.5 completado
+- [ ] **TICKET 2.6 completado (Tests)**
 - [ ] Conversiones son precisas (verificar con calculadora)
 - [ ] Notación científica funciona correctamente
 - [ ] Página accesible desde navegación
 - [ ] Funciona en móvil
 - [ ] Sin errores en consola
-- [ ] Commit realizado
+- [ ] Todos los tests pasan (`npm run test:run`)
+- [ ] CHANGELOG.md actualizado
+- [ ] Versión actualizada a `0.3.0`
+- [ ] Commit realizado con tag `v0.3.0`
 

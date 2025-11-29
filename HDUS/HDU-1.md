@@ -3,7 +3,8 @@
 > **Prioridad:** 🔴 Alta  
 > **Estado:** ⏳ Pendiente  
 > **Dependencias:** HDU-0 (completa)  
-> **Estimación:** 3-4 horas
+> **Estimación:** 3-4 horas  
+> **Versión:** `0.2.0` (MINOR)
 
 ---
 
@@ -233,6 +234,48 @@ src/features/molar-mass/
 
 ---
 
+---
+
+## 🧪 Tests Requeridos
+
+### TICKET 1.6: Tests Unitarios
+**Tipo:** Testing  
+**Archivo(s):** `src/features/molar-mass/useMolarMass.test.ts`, `src/features/molar-mass/MassBreakdown.test.tsx`
+
+**Tests a crear:**
+
+#### Hook `useMolarMass`
+```typescript
+describe('useMolarMass', () => {
+  it('debe inicializar con estado idle');
+  it('debe actualizar formula al llamar setFormula');
+  it('debe calcular masa molar correctamente');
+  it('debe manejar errores de fórmula inválida');
+  it('debe guardar en historial tras cálculo exitoso');
+  it('debe limpiar estado al llamar clear');
+  it('debe limitar historial a 5 elementos');
+});
+```
+
+#### Componente `MassBreakdown`
+```typescript
+describe('MassBreakdown', () => {
+  it('debe renderizar todos los elementos del breakdown');
+  it('debe mostrar colores CPK correctos');
+  it('debe mostrar el total correctamente');
+  it('debe manejar breakdown vacío');
+});
+```
+
+**Definición de Hecho:**
+```
+✓ Mínimo 10 tests creados
+✓ Todos los tests pasan
+✓ Cobertura > 80% para archivos nuevos
+```
+
+---
+
 ## ✅ Checklist Final HDU-1
 
 - [ ] TICKET 1.1 completado
@@ -240,8 +283,12 @@ src/features/molar-mass/
 - [ ] TICKET 1.3 completado
 - [ ] TICKET 1.4 completado
 - [ ] TICKET 1.5 completado
+- [ ] **TICKET 1.6 completado (Tests)**
 - [ ] Página accesible desde navegación
 - [ ] Funciona en móvil
 - [ ] Sin errores en consola
-- [ ] Commit realizado
+- [ ] Todos los tests pasan (`npm run test:run`)
+- [ ] CHANGELOG.md actualizado
+- [ ] Versión actualizada a `0.2.0`
+- [ ] Commit realizado con tag `v0.2.0`
 

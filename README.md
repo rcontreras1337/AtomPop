@@ -212,6 +212,19 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario.
 
 ---
 
+## 📜 Historial de Versiones
+
+| Versión | Fecha | HDU | Descripción |
+|---------|-------|-----|-------------|
+| `0.1.0` | 2024-11-29 | HDU-0 | Infraestructura base, motor químico, 83 tests |
+| `0.0.0` | 2024-11-29 | - | Init del proyecto con Vite + React + TS |
+
+Para ver el historial completo de cambios, consulta [CHANGELOG.md](./CHANGELOG.md).
+
+Para entender el sistema de versionamiento, consulta [VERSIONING.md](./VERSIONING.md).
+
+---
+
 ## 🤝 Contribuir
 
 1. Fork el proyecto

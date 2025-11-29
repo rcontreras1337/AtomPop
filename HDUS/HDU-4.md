@@ -3,7 +3,8 @@
 > **Prioridad:** 🟡 Media  
 > **Estado:** ⏳ Pendiente  
 > **Dependencias:** HDU-0 (completa)  
-> **Estimación:** 3-4 horas
+> **Estimación:** 3-4 horas  
+> **Versión:** `0.5.0` (MINOR)
 
 ---
 
@@ -338,6 +339,41 @@ src/features/empirical/
 
 ---
 
+---
+
+## 🧪 Tests Requeridos
+
+### TICKET 4.6: Tests Unitarios
+**Tipo:** Testing  
+**Archivo(s):** `src/features/empirical/useEmpiricalFormula.test.ts`, `src/features/empirical/useMolecularFormula.test.ts`
+
+**Tests a crear:**
+```typescript
+describe('useEmpiricalFormula', () => {
+  it('debe calcular fórmula empírica desde porcentajes');
+  it('debe validar que porcentajes sumen ~100%');
+  it('debe requerir mínimo 2 elementos');
+  it('debe generar pasos del cálculo');
+  it('debe manejar valores no enteros');
+});
+
+describe('useMolecularFormula', () => {
+  it('debe calcular multiplicador correctamente');
+  it('debe generar fórmula molecular');
+  it('debe validar fórmula empírica');
+  it('debe advertir si multiplicador no es entero');
+});
+```
+
+**Definición de Hecho:**
+```
+✓ Mínimo 9 tests creados
+✓ Todos los tests pasan
+✓ Cobertura > 80% para archivos nuevos
+```
+
+---
+
 ## ✅ Checklist Final HDU-4
 
 - [ ] TICKET 4.1 completado
@@ -345,11 +381,15 @@ src/features/empirical/
 - [ ] TICKET 4.3 completado
 - [ ] TICKET 4.4 completado
 - [ ] TICKET 4.5 completado
+- [ ] **TICKET 4.6 completado (Tests)**
 - [ ] Modo 1 (Empírica) funciona correctamente
 - [ ] Modo 2 (Molecular) funciona correctamente
 - [ ] Pasos son educativos y correctos
 - [ ] Página accesible desde navegación
 - [ ] Funciona en móvil
 - [ ] Sin errores en consola
-- [ ] Commit realizado
+- [ ] Todos los tests pasan (`npm run test:run`)
+- [ ] CHANGELOG.md actualizado
+- [ ] Versión actualizada a `0.5.0`
+- [ ] Commit realizado con tag `v0.5.0`
 

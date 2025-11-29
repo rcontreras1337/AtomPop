@@ -1,10 +1,11 @@
 # HDU-1: Calculadora de Masa Molar
 
 > **Prioridad:** 🔴 Alta  
-> **Estado:** ⏳ Pendiente  
+> **Estado:** ✅ Completado  
 > **Dependencias:** HDU-0 (completa)  
 > **Estimación:** 3-4 horas  
-> **Versión:** `0.2.0` (MINOR)
+> **Versión:** `0.2.0` (MINOR)  
+> **Fecha Completado:** 2024-11-29
 
 ---
 
@@ -18,30 +19,30 @@
 
 ## 🎯 Criterios de Aceptación
 
-- [ ] Puedo escribir una fórmula química en un campo de texto
-- [ ] La fórmula se valida en tiempo real
-- [ ] Si la fórmula es inválida, veo un mensaje de error claro
-- [ ] Si la fórmula es válida, veo:
+- [x] Puedo escribir una fórmula química en un campo de texto
+- [x] La fórmula se valida en tiempo real
+- [x] Si la fórmula es inválida, veo un mensaje de error claro
+- [x] Si la fórmula es válida, veo:
   - La masa molar total en g/mol
   - El desglose elemento por elemento
   - Una animación atractiva al mostrar el resultado
-- [ ] Puedo copiar el resultado al portapapeles
-- [ ] La interfaz es responsive (funciona en móvil)
+- [x] Puedo copiar el resultado al portapapeles
+- [x] La interfaz es responsive (funciona en móvil)
 
 ---
 
 ## 🎫 Tickets
 
-### TICKET 1.1: Crear Página de Masa Molar
+### TICKET 1.1: Crear Página de Masa Molar ✅
 **Tipo:** UI/Página  
 **Archivo(s):** `src/pages/MolarMassPage.tsx`
 
 **Tareas:**
-- [ ] Crear estructura base de la página
-- [ ] Agregar título y descripción explicativa
-- [ ] Incluir el componente `ChemicalInput` para la fórmula
-- [ ] Agregar botón "Calcular"
-- [ ] Zona de resultados (inicialmente vacía)
+- [x] Crear estructura base de la página
+- [x] Agregar título y descripción explicativa
+- [x] Incluir el componente `ChemicalInput` para la fórmula
+- [x] Agregar botón "Calcular"
+- [x] Zona de resultados (inicialmente vacía)
 
 **Wireframe:**
 ```
@@ -74,16 +75,16 @@
 
 ---
 
-### TICKET 1.2: Implementar Lógica de Cálculo
+### TICKET 1.2: Implementar Lógica de Cálculo ✅
 **Tipo:** Integración  
 **Archivo(s):** `src/pages/MolarMassPage.tsx`, `src/features/molar-mass/useMolarMass.ts`
 
 **Tareas:**
-- [ ] Crear hook `useMolarMass` que encapsule la lógica
-- [ ] Conectar input con el parser de fórmulas
-- [ ] Llamar a `calculateMolarMass` del engine
-- [ ] Manejar estados: `idle`, `calculating`, `success`, `error`
-- [ ] Guardar historial de cálculos en estado local (últimos 5)
+- [x] Crear hook `useMolarMass` que encapsule la lógica
+- [x] Conectar input con el parser de fórmulas
+- [x] Llamar a `calculateMolarMass` del engine
+- [x] Manejar estados: `idle`, `calculating`, `success`, `error`
+- [x] Guardar historial de cálculos en estado local (últimos 5)
 
 **Hook Interface:**
 ```typescript
@@ -108,19 +109,19 @@ interface UseMolarMassReturn {
 
 ---
 
-### TICKET 1.3: Crear Componente de Desglose
+### TICKET 1.3: Crear Componente de Desglose ✅
 **Tipo:** UI  
 **Archivo(s):** `src/features/molar-mass/MassBreakdown.tsx`
 
 **Tareas:**
-- [ ] Crear componente que muestre el desglose paso a paso
-- [ ] Cada elemento muestra:
+- [x] Crear componente que muestre el desglose paso a paso
+- [x] Cada elemento muestra:
   - Badge con símbolo y color
   - Cantidad (subíndice en fórmula)
   - Masa atómica individual
   - Subtotal (masa × cantidad)
-- [ ] Línea final con el total
-- [ ] Animación de entrada escalonada (stagger)
+- [x] Línea final con el total
+- [x] Animación de entrada escalonada (stagger)
 
 **Ejemplo Visual:**
 ```
@@ -144,18 +145,18 @@ interface UseMolarMassReturn {
 
 ---
 
-### TICKET 1.4: Agregar Validación Visual
+### TICKET 1.4: Agregar Validación Visual ✅
 **Tipo:** UX  
 **Archivo(s):** `src/pages/MolarMassPage.tsx`, `src/components/ui/ChemicalInput.tsx`
 
 **Tareas:**
-- [ ] Validar fórmula mientras el usuario escribe (debounce 300ms)
-- [ ] Mostrar indicador de estado:
+- [x] Validar fórmula mientras el usuario escribe (debounce 300ms)
+- [x] Mostrar indicador de estado:
   - 🟢 Verde: Fórmula válida
   - 🔴 Rojo: Fórmula inválida
   - ⚪ Neutro: Campo vacío
-- [ ] Animación de "shake" cuando hay error
-- [ ] Tooltip con mensaje de error específico
+- [x] Animación de "shake" cuando hay error
+- [x] Tooltip con mensaje de error específico
 
 **Mensajes de Error:**
 | Caso | Mensaje |
@@ -174,20 +175,20 @@ interface UseMolarMassReturn {
 
 ---
 
-### TICKET 1.5: Agregar Funcionalidades Extra
+### TICKET 1.5: Agregar Funcionalidades Extra ✅
 **Tipo:** UX/Feature  
 **Archivo(s):** `src/pages/MolarMassPage.tsx`
 
 **Tareas:**
-- [ ] Botón "Copiar resultado" con feedback visual
-- [ ] Botón "Limpiar" para resetear
-- [ ] Mostrar fórmulas de ejemplo clickeables:
+- [x] Botón "Copiar resultado" con feedback visual
+- [x] Botón "Limpiar" para resetear
+- [x] Mostrar fórmulas de ejemplo clickeables:
   - H₂O (Agua)
   - NaCl (Sal)
   - C₆H₁₂O₆ (Glucosa)
   - H₂SO₄ (Ácido Sulfúrico)
-- [ ] Al clickear un ejemplo, se llena el input automáticamente
-- [ ] Historial de últimos 5 cálculos (clickeables)
+- [x] Al clickear un ejemplo, se llena el input automáticamente
+- [x] Historial de últimos 5 cálculos (clickeables)
 
 **Definición de Hecho:**
 ```
@@ -238,7 +239,7 @@ src/features/molar-mass/
 
 ## 🧪 Tests Requeridos
 
-### TICKET 1.6: Tests Unitarios
+### TICKET 1.6: Tests Unitarios ✅
 **Tipo:** Testing  
 **Archivo(s):** `src/features/molar-mass/useMolarMass.test.ts`, `src/features/molar-mass/MassBreakdown.test.tsx`
 
@@ -278,17 +279,28 @@ describe('MassBreakdown', () => {
 
 ## ✅ Checklist Final HDU-1
 
-- [ ] TICKET 1.1 completado
-- [ ] TICKET 1.2 completado
-- [ ] TICKET 1.3 completado
-- [ ] TICKET 1.4 completado
-- [ ] TICKET 1.5 completado
-- [ ] **TICKET 1.6 completado (Tests)**
-- [ ] Página accesible desde navegación
-- [ ] Funciona en móvil
-- [ ] Sin errores en consola
-- [ ] Todos los tests pasan (`npm run test:run`)
-- [ ] CHANGELOG.md actualizado
-- [ ] Versión actualizada a `0.2.0`
-- [ ] Commit realizado con tag `v0.2.0`
+- [x] TICKET 1.1 completado
+- [x] TICKET 1.2 completado
+- [x] TICKET 1.3 completado
+- [x] TICKET 1.4 completado
+- [x] TICKET 1.5 completado
+- [x] **TICKET 1.6 completado (Tests)**
+- [x] Página accesible desde navegación
+- [x] Funciona en móvil
+- [x] Sin errores en consola
+- [x] Todos los tests pasan (`npm run test:run`)
+- [x] CHANGELOG.md actualizado
+- [x] Versión actualizada a `0.2.0`
+- [x] Commit realizado con tag `v0.2.0`
+
+---
+
+## 📊 Métricas Finales
+
+| Métrica | Valor |
+|---------|-------|
+| Tests nuevos | 28 |
+| Tests totales | 111 |
+| Archivos creados | 5 |
+| Tickets completados | 6/6 |
 

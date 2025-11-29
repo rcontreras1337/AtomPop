@@ -10,10 +10,76 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Por Hacer
-- HDU-1: Calculadora de Masa Molar (funcionalidad completa)
 - HDU-2: Conversor Moles/Gramos/Átomos
 - HDU-3: Composición Porcentual con gráficos
 - HDU-4: Fórmula Empírica y Molecular
+
+---
+
+## [0.2.0] - 2024-11-29
+
+### 🎉 HDU-1: Calculadora de Masa Molar
+
+> **Tipo:** MINOR | **Rama:** `feature/hdu-1`
+
+Primera calculadora completamente funcional del proyecto.
+
+### ✨ Agregado
+
+#### Funcionalidad Principal
+- **Calculadora de Masa Molar** completamente funcional
+  - Input de fórmulas con validación en tiempo real (debounce 300ms)
+  - Cálculo instantáneo con desglose por elemento
+  - Historial de últimos 5 cálculos
+  - Copiar resultado al portapapeles
+  - Fórmulas de ejemplo clickeables
+
+#### Nueva Carpeta `src/features/molar-mass/`
+- **`useMolarMass.ts`** - Hook principal con:
+  - Estados: idle, calculating, success, error
+  - Gestión de historial (máximo 5 entradas, sin duplicados)
+  - Funciones: calculate, clear, clearHistory
+  
+- **`MassBreakdown.tsx`** - Componente de desglose:
+  - Muestra cada elemento con badge de color CPK
+  - Animaciones escalonadas (stagger) con Framer Motion
+  - Cálculo detallado: masa atómica × cantidad = subtotal
+  - Total con estilo destacado
+
+#### Mejoras en UI
+- Validación visual con indicadores verde/rojo
+- Animación shake en errores
+- Animaciones de entrada para resultados
+- Feedback visual al copiar
+
+#### Testing
+- **28 tests nuevos** (17 para hook + 11 para componente)
+- Tests cubren: cálculos, errores, historial, breakdown
+- Total proyecto: **111 tests** (100% pasando)
+
+### 📁 Estructura de Archivos Nuevos
+
+```
+src/features/molar-mass/
+├── useMolarMass.ts           # Hook principal
+├── useMolarMass.test.ts      # 17 tests
+├── MassBreakdown.tsx         # Componente desglose
+├── MassBreakdown.test.tsx    # 11 tests
+└── index.ts                  # Exports
+```
+
+### 📊 Métricas
+
+| Métrica | Valor |
+|---------|-------|
+| Tests nuevos | 28 |
+| Tests totales | 111 |
+| Archivos creados | 5 |
+| Tickets completados | 6 |
+
+### 🔗 Links
+
+- **Rama:** [feature/hdu-1](https://github.com/rcontreras1337/AtomPop/tree/feature/hdu-1)
 
 ---
 
@@ -161,7 +227,6 @@ Cada versión incluye:
 
 | Versión | HDU | Descripción |
 |---------|-----|-------------|
-| 0.2.0 | HDU-1 | Calculadora de Masa Molar funcional |
 | 0.3.0 | HDU-2 | Conversor Moles/Gramos/Átomos |
 | 0.4.0 | HDU-3 | Composición Porcentual con gráficos |
 | 0.5.0 | HDU-4 | Fórmula Empírica y Molecular |

@@ -1,10 +1,10 @@
 # 🧪 AtomPop - Calculadora de Química Educativa
 
-![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.1.0-amber?style=for-the-badge)
+![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.2.0-amber?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
-![Tests](https://img.shields.io/badge/Tests-83%20passing-22c55e?style=flat-square)
+![Tests](https://img.shields.io/badge/Tests-111%20passing-22c55e?style=flat-square)
 
 > **Una calculadora web de química amigable, visualmente atractiva y accesible para estudiantes**, inspirada en el estilo visual de "Lluvia de Hamburguesas" (Cloudy with a Chance of Meatballs).
 
@@ -27,7 +27,7 @@ La aplicación presenta una interfaz de "laboratorio divertido" con:
 
 | Módulo | Descripción | Estado |
 |--------|-------------|--------|
-| **Masa Molar** | Calcula la masa molar de cualquier compuesto con desglose | 🔧 UI Lista |
+| **Masa Molar** | Calcula la masa molar de cualquier compuesto con desglose | ✅ Funcional |
 | **Conversor** | Convierte entre moles, gramos y partículas | 🔧 UI Lista |
 | **Composición %** | Muestra porcentaje de masa de cada elemento | 🔧 UI Lista |
 | **Fórmula Empírica** | Calcula fórmulas empírica y molecular | 🔧 UI Lista |
@@ -106,7 +106,9 @@ npm run test:coverage
 | `formulaParser.ts` | 24 | ✅ |
 | `chemistryEngine.ts` | 37 | ✅ |
 | `usePeriodicTable.ts` | 22 | ✅ |
-| **Total** | **83** | ✅ |
+| `useMolarMass.ts` | 17 | ✅ |
+| `MassBreakdown.tsx` | 11 | ✅ |
+| **Total** | **111** | ✅ |
 
 ---
 
@@ -129,10 +131,14 @@ src/
 │   └── MainLayout.tsx   # Layout principal con navbar
 ├── pages/
 │   ├── HomePage.tsx
-│   ├── MolarMassPage.tsx
+│   ├── MolarMassPage.tsx      # ✅ Funcional
 │   ├── ConverterPage.tsx
 │   ├── CompositionPage.tsx
 │   └── EmpiricalPage.tsx
+├── features/
+│   └── molar-mass/            # ✅ HDU-1
+│       ├── useMolarMass.ts
+│       └── MassBreakdown.tsx
 ├── utils/
 │   ├── formulaParser.ts     # Parser de fórmulas químicas
 │   ├── chemistryEngine.ts   # Motor de cálculos
@@ -203,7 +209,7 @@ const result = parseFormula('Ca(OH)2');
 ## 📋 Roadmap
 
 - [x] **HDU-0:** Infraestructura y Motor Químico
-- [ ] **HDU-1:** Calculadora de Masa Molar (funcionalidad completa)
+- [x] **HDU-1:** Calculadora de Masa Molar (funcionalidad completa)
 - [ ] **HDU-2:** Conversor Moles/Gramos/Átomos
 - [ ] **HDU-3:** Composición Porcentual con gráficos
 - [ ] **HDU-4:** Fórmula Empírica y Molecular
@@ -216,6 +222,7 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario.
 
 | Versión | Fecha | HDU | Descripción |
 |---------|-------|-----|-------------|
+| `0.2.0` | 2024-11-29 | HDU-1 | Calculadora de Masa Molar funcional, 111 tests |
 | `0.1.0` | 2024-11-29 | HDU-0 | Infraestructura base, motor químico, 83 tests |
 | `0.0.0` | 2024-11-29 | - | Init del proyecto con Vite + React + TS |
 

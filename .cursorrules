@@ -153,13 +153,19 @@ src/features/[feature-name]/
   - 4 componentes UI base
   - 83 tests unitarios
 
+- ✅ HDU-1: Calculadora de Masa Molar (v0.2.0)
+  - Hook useMolarMass con historial
+  - Componente MassBreakdown con animaciones
+  - Validación en tiempo real (debounce)
+  - Copiar resultado, ejemplos clickeables
+  - 28 tests nuevos (111 totales)
+
 ### Pendiente:
-- ⏳ HDU-1: Calculadora de Masa Molar (v0.2.0)
 - ⏳ HDU-2: Conversor Moles/Gramos/Átomos (v0.3.0)
 - ⏳ HDU-3: Composición Porcentual (v0.4.0)
 - ⏳ HDU-4: Fórmula Empírica y Molecular (v0.5.0)
 
-### Rama actual: `feature/hdu-0` (pendiente merge a main)
+### Rama actual: `feature/hdu-1` (pendiente merge a main)
 
 ---
 

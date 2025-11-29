@@ -1,0 +1,535 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   🧪 ATOMPOP - TEMA "LABORATORIO DE FLINT LOCO"
+   Inspirado en "Lluvia de Hamburguesas" (Cloudy with a Chance of Meatballs)
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* 🎨 Paleta Principal */
+  --color-lab-dark: #0a0f1a;
+  --color-lab-base: #0f172a;
+  --color-lab-surface: #1e293b;
+  --color-lab-elevated: #334155;
+  
+  /* 🔥 Colores Neón */
+  --color-neon-amber: #f59e0b;
+  --color-neon-amber-glow: #fbbf24;
+  --color-neon-cyan: #06b6d4;
+  --color-neon-cyan-glow: #22d3ee;
+  --color-neon-green: #22c55e;
+  --color-neon-green-glow: #4ade80;
+  --color-neon-pink: #ec4899;
+  --color-neon-purple: #a855f7;
+  
+  /* ⚠️ Estados */
+  --color-danger: #ef4444;
+  --color-warning: #eab308;
+  --color-success: #22c55e;
+  
+  /* 📝 Tipografía */
+  --font-family-display: 'Fredoka', 'Comic Sans MS', cursive;
+  --font-family-sans: 'Fredoka', system-ui, sans-serif;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🌍 ESTILOS BASE
+   ═══════════════════════════════════════════════════════════════ */
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  font-family: var(--font-family-sans);
+}
+
+body {
+  background: 
+    radial-gradient(ellipse at 20% 20%, rgba(6, 182, 212, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 50%, rgba(168, 85, 247, 0.05) 0%, transparent 70%),
+    linear-gradient(180deg, #0a0f1a 0%, #0f172a 50%, #1e293b 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-neon-amber);
+  color: var(--color-lab-dark);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🔘 BOTONES ESTILO "BOTÓN DE EMERGENCIA"
+   ═══════════════════════════════════════════════════════════════ */
+
+.btn-primary {
+  position: relative;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border-radius: 1rem;
+  background-color: var(--color-neon-amber);
+  color: var(--color-lab-dark);
+  font-family: var(--font-family-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 150ms ease-out;
+  box-shadow: 
+    0 6px 0 #b45309,
+    0 8px 20px rgba(245, 158, 11, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-neon-amber-glow);
+  box-shadow: 
+    0 6px 0 #b45309,
+    0 8px 30px rgba(245, 158, 11, 0.6),
+    inset 0 2px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 2px 0 #b45309,
+    0 4px 10px rgba(245, 158, 11, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary {
+  position: relative;
+  padding: 1rem 2rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  border-radius: 1rem;
+  background-color: var(--color-lab-surface);
+  color: white;
+  font-family: var(--font-family-display);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 150ms ease-out;
+  border: 2px solid rgba(6, 182, 212, 0.5);
+  cursor: pointer;
+  box-shadow: 
+    0 6px 0 #0f172a,
+    0 0 20px rgba(6, 182, 212, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-neon-cyan);
+  background-color: var(--color-lab-elevated);
+  box-shadow: 
+    0 6px 0 #0f172a,
+    0 0 30px rgba(6, 182, 212, 0.4),
+    inset 0 2px 0 rgba(255, 255, 255, 0.15);
+}
+
+.btn-secondary:active {
+  transform: translateY(4px);
+  box-shadow: 
+    0 2px 0 #0f172a,
+    0 0 15px rgba(6, 182, 212, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🧪 INPUTS ESTILO "TUBO DE ENSAYO"
+   ═══════════════════════════════════════════════════════════════ */
+
+.input-tube {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border-radius: 9999px;
+  background-color: rgba(30, 41, 59, 0.8);
+  backdrop-filter: blur(8px);
+  border: 2px solid var(--color-lab-elevated);
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 500;
+  font-family: var(--font-family-sans);
+  transition: all 300ms;
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input-tube::placeholder {
+  color: rgb(100, 116, 139);
+}
+
+.input-tube:focus {
+  outline: none;
+  border-color: var(--color-neon-cyan);
+  background-color: var(--color-lab-surface);
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(6, 182, 212, 0.3),
+    0 0 40px rgba(6, 182, 212, 0.1);
+}
+
+.input-tube.error {
+  border-color: var(--color-danger);
+  animation: shake 0.5s ease-in-out;
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(239, 68, 68, 0.3);
+}
+
+.input-tube.success {
+  border-color: var(--color-neon-green);
+  box-shadow: 
+    inset 0 4px 8px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(34, 197, 94, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🫧 TARJETAS GLASSMORPHISM "PROBETA"
+   ═══════════════════════════════════════════════════════════════ */
+
+.card-glass {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  background: 
+    linear-gradient(135deg, 
+      rgba(30, 41, 59, 0.8) 0%, 
+      rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.card-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 1rem;
+  right: 1rem;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.2) 50%, 
+    transparent 100%);
+}
+
+.card-glass-amber {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  background: 
+    linear-gradient(135deg, 
+      rgba(30, 41, 59, 0.8) 0%, 
+      rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(245, 158, 11, 0.1),
+    inset 0 1px 0 rgba(245, 158, 11, 0.2);
+}
+
+.card-glass-cyan {
+  position: relative;
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(16px);
+  background: 
+    linear-gradient(135deg, 
+      rgba(30, 41, 59, 0.8) 0%, 
+      rgba(15, 23, 42, 0.9) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(6, 182, 212, 0.1),
+    inset 0 1px 0 rgba(6, 182, 212, 0.2);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🏷️ BADGES DE ELEMENTOS
+   ═══════════════════════════════════════════════════════════════ */
+
+.element-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  font-size: 1.125rem;
+  font-family: var(--font-family-display);
+  transition: all 300ms;
+  box-shadow: 
+    0 4px 0 rgba(0, 0, 0, 0.3),
+    inset 0 2px 0 rgba(255, 255, 255, 0.2);
+}
+
+.element-badge:hover {
+  transform: scale(1.1);
+  box-shadow: 
+    0 6px 0 rgba(0, 0, 0, 0.3),
+    0 0 20px currentColor,
+    inset 0 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   📊 RESULTADO "PANTALLA DE LABORATORIO"
+   ═══════════════════════════════════════════════════════════════ */
+
+.result-display {
+  position: relative;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  overflow: hidden;
+  background: 
+    linear-gradient(180deg, 
+      rgba(10, 15, 26, 0.95) 0%, 
+      rgba(15, 23, 42, 0.98) 100%);
+  border: 2px solid rgba(34, 197, 94, 0.3);
+  box-shadow: 
+    0 0 40px rgba(34, 197, 94, 0.15),
+    inset 0 0 60px rgba(34, 197, 94, 0.05);
+}
+
+.result-display::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 2px,
+      rgba(34, 197, 94, 0.03) 2px,
+      rgba(34, 197, 94, 0.03) 4px
+    );
+  pointer-events: none;
+}
+
+.result-value {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #22c55e, #06b6d4, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: var(--font-family-display);
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .result-value {
+    font-size: 3.75rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎯 NAVEGACIÓN
+   ═══════════════════════════════════════════════════════════════ */
+
+.nav-link {
+  position: relative;
+  padding: 0.5rem 1rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  color: rgb(148, 163, 184);
+  font-family: var(--font-family-display);
+  transition: all 300ms;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: white;
+  background-color: rgba(30, 41, 59, 0.5);
+}
+
+.nav-link.active {
+  color: var(--color-neon-amber);
+  background-color: var(--color-lab-surface);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 2px;
+  background-color: var(--color-neon-amber);
+  border-radius: 9999px;
+  box-shadow: 0 0 10px var(--color-neon-amber);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ✨ UTILIDADES DE TEXTO
+   ═══════════════════════════════════════════════════════════════ */
+
+.text-glow-amber {
+  text-shadow: 0 0 20px rgba(245, 158, 11, 0.5), 0 0 40px rgba(245, 158, 11, 0.3);
+}
+
+.text-glow-cyan {
+  text-shadow: 0 0 20px rgba(6, 182, 212, 0.5), 0 0 40px rgba(6, 182, 212, 0.3);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 20px rgba(34, 197, 94, 0.5), 0 0 40px rgba(34, 197, 94, 0.3);
+}
+
+.text-gradient-fire {
+  background: linear-gradient(90deg, #fbbf24, #f97316, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-ocean {
+  background: linear-gradient(90deg, #22d3ee, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-nature {
+  background: linear-gradient(90deg, #4ade80, #10b981, #14b8a6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎬 ANIMACIONES
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-3deg);
+  }
+  75% {
+    transform: translateY(-25px) rotate(3deg);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    filter: brightness(1);
+    opacity: 1;
+  }
+  50% {
+    filter: brightness(1.2);
+    opacity: 0.9;
+  }
+}
+
+@keyframes bubble-rise {
+  0% {
+    transform: translateY(100%) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.float-bubble {
+  animation: float 6s ease-in-out infinite;
+}
+
+.molecule-spin {
+  animation: spin-slow 20s linear infinite;
+}
+
+.pulse-glow {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+/* Burbuja decorativa */
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.15;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(255, 255, 255, 0.8) 0%, 
+    rgba(6, 182, 212, 0.4) 50%, 
+    transparent 70%);
+  animation: bubble-rise linear infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   📱 RESPONSIVE
+   ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .card-glass,
+  .card-glass-amber,
+  .card-glass-cyan {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   🎨 SCROLLBAR PERSONALIZADO
+   ═══════════════════════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-lab-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--color-neon-cyan), var(--color-neon-purple));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--color-neon-cyan-glow), var(--color-neon-pink));
+}

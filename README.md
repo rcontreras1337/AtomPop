@@ -228,7 +228,7 @@ Este proyecto es de uso educativo.
 
 ---
 
-## 👨‍🔬 Autor
+## 👨‍🔬 Autor: Rubén Contreras
 
 Desarrollado con 🧪 y ☕ para estudiantes de química.
 

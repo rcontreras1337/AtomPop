@@ -24,7 +24,7 @@ const containerVariants = {
       delayChildren: 0.2,
     },
   },
-};
+} as const;
 
 const itemVariants = {
   hidden: { opacity: 0, x: -20 },
@@ -32,7 +32,7 @@ const itemVariants = {
     opacity: 1,
     x: 0,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       damping: 15,
       stiffness: 100,
     },
@@ -46,7 +46,7 @@ const totalVariants = {
     y: 0,
     scale: 1,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       damping: 10,
       delay: 0.4,
     },

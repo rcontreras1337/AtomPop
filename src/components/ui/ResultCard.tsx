@@ -35,7 +35,7 @@ export const ResultCard: React.FC<ResultCardProps> = ({
   const animationProps = animate ? {
     initial: { opacity: 0, y: 20, scale: 0.98 },
     animate: { opacity: 1, y: 0, scale: 1 },
-    transition: { type: 'spring', damping: 15, stiffness: 100 },
+    transition: { type: 'spring' as const, damping: 15, stiffness: 100 },
   } : {};
   
   return (
@@ -85,7 +85,7 @@ export const ResultValue: React.FC<ResultValueProps> = ({
         className={`result-value ${sizeClasses[size]}`}
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ type: 'spring', damping: 10 }}
+        transition={{ type: 'spring' as const, damping: 10 }}
       >
         {value}
       </motion.span>

@@ -6,7 +6,6 @@
 import { useMemo } from 'react';
 import { 
   elements, 
-  elementsBySymbol, 
   elementsByNumber,
   getElement,
   isValidElement,

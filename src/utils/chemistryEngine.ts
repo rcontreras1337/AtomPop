@@ -3,8 +3,8 @@
  * Funciones para cálculos de masa molar, conversiones y composición
  */
 
-import { getElement, AVOGADRO, type Element } from '../data/elements';
-import { parseFormula, type ParsedFormula, type ParsedElement } from './formulaParser';
+import { getElement, AVOGADRO } from '../data/elements';
+import { parseFormula } from './formulaParser';
 
 // ═══════════════════════════════════════════════════════════════
 // TIPOS

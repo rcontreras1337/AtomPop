@@ -211,9 +211,8 @@ export const ConverterPage = () => {
                 <Button
                   variant="ghost"
                   onClick={clear}
-                  className="flex items-center gap-2"
+                  icon={<Trash2 size={16} />}
                 >
-                  <Trash2 size={16} />
                   Limpiar valores
                 </Button>
               </motion.div>

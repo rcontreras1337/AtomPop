@@ -1,6 +1,6 @@
 # 🧪 AtomPop - Calculadora de Química Educativa
 
-![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.5.0-amber?style=for-the-badge)
+![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.5.1-amber?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
@@ -55,6 +55,7 @@ La aplicación presenta una interfaz de "laboratorio divertido" con:
 | **Framer Motion** | Animaciones |
 | **React Router 7** | Navegación SPA |
 | **Vitest** | Testing unitario |
+| **Cypress** | Testing E2E |
 | **Lucide React** | Iconografía |
 
 ---
@@ -124,15 +125,22 @@ npm run e2e:headless
 | `usePeriodicTable.ts` | 22 | ✅ |
 | `useMolarMass.ts` | 17 | ✅ |
 | `MassBreakdown.tsx` | 11 | ✅ |
-| **Total Unitarios** | **111** | ✅ |
+| `useConverter.ts` | 24 | ✅ |
+| `useComposition.ts` | 15 | ✅ |
+| `useEmpiricalFormula.ts` | 18 | ✅ |
+| `useMolecularFormula.ts` | 18 | ✅ |
+| **Total Unitarios** | **186** | ✅ |
 
 #### Tests E2E (Cypress)
 
 | Suite | Escenarios | Estado |
 |-------|------------|--------|
 | `hdu-0-navigation.cy.ts` | Navegación, responsive, menú | ✅ |
-| `hdu-1-molar-mass.cy.ts` | Calculadora completa | ✅ |
-| **Total E2E** | **37** | ✅ |
+| `hdu-1-molar-mass.cy.ts` | Calculadora masa molar | ✅ |
+| `hdu-2-converter.cy.ts` | Conversor de unidades | ✅ |
+| `hdu-3-composition.cy.ts` | Composición porcentual | ✅ |
+| `hdu-4-empirical.cy.ts` | Fórmulas empírica/molecular | ✅ |
+| **Total E2E** | **117** | ✅ |
 
 ---
 
@@ -156,13 +164,14 @@ src/
 ├── pages/
 │   ├── HomePage.tsx
 │   ├── MolarMassPage.tsx      # ✅ Funcional
-│   ├── ConverterPage.tsx
-│   ├── CompositionPage.tsx
-│   └── EmpiricalPage.tsx
+│   ├── ConverterPage.tsx      # ✅ Funcional
+│   ├── CompositionPage.tsx    # ✅ Funcional
+│   └── EmpiricalPage.tsx      # ✅ Funcional
 ├── features/
-│   └── molar-mass/            # ✅ HDU-1
-│       ├── useMolarMass.ts
-│       └── MassBreakdown.tsx
+│   ├── molar-mass/            # HDU-1
+│   ├── converter/             # HDU-2
+│   ├── composition/           # HDU-3
+│   └── empirical/             # HDU-4
 ├── utils/
 │   ├── formulaParser.ts     # Parser de fórmulas químicas
 │   ├── chemistryEngine.ts   # Motor de cálculos
@@ -253,13 +262,29 @@ const result = parseFormula('Ca(OH)2');
 
 ## 📋 Roadmap
 
-- [x] **HDU-0:** Infraestructura y Motor Químico
-- [x] **HDU-1:** Calculadora de Masa Molar (funcionalidad completa)
-- [x] **HDU-2:** Conversor Moles/Gramos/Átomos (funcional)
-- [x] **HDU-3:** Composición Porcentual con gráficos (funcional)
-- [x] **HDU-4:** Fórmula Empírica y Molecular (funcional) ✅ **COMPLETADO**
+### ✅ Completado (v0.5.0)
 
-Ver carpeta `HDUS/` para detalles de cada historia de usuario.
+- [x] **HDU-0:** Infraestructura y Motor Químico
+- [x] **HDU-1:** Calculadora de Masa Molar
+- [x] **HDU-2:** Conversor Moles/Gramos/Átomos
+- [x] **HDU-3:** Composición Porcentual con gráficos
+- [x] **HDU-4:** Fórmula Empírica y Molecular
+
+### 🐛 Fixes
+
+- [x] **FIX-1:** Botón "Limpiar valores" con icono mal posicionado ✅ (v0.5.1)
+- [ ] **FIX-2:** Botón de Tabla Periódica sin funcionalidad (v0.6.0)
+
+### 🔮 Mejoras Futuras
+
+- [ ] **HDU-5:** Balanceador de Ecuaciones Químicas (v0.6.0)
+- [ ] **HDU-6:** Calculadora de pH (v0.7.0)
+- [ ] **HDU-7:** Modo Oscuro/Claro toggle (v0.8.0)
+- [ ] **HDU-8:** PWA - App instalable (v0.9.0)
+- [ ] **HDU-9:** Exportar resultados a PDF (v0.10.0)
+- [ ] **HDU-10:** Ampliar tabla periódica a 118 elementos (v0.11.0)
+
+Ver carpeta `HDUS/` para detalles de cada historia de usuario y `HDUS/fixes/` para correcciones de bugs.
 
 ---
 
@@ -267,6 +292,7 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario.
 
 | Versión | Fecha | HDU | Descripción |
 |---------|-------|-----|-------------|
+| `0.5.1` | 2024-11-30 | FIX-1 | Botón limpiar corregido, CI solo en PR |
 | `0.5.0` | 2024-11-30 | HDU-4 | Fórmula Empírica y Molecular, 186+117 tests |
 | `0.4.0` | 2024-11-30 | HDU-3 | Composición Porcentual con gráfico, 165+86 tests |
 | `0.3.0` | 2024-11-30 | HDU-2 | Conversor Moles/Gramos/Partículas, 159+61 tests |
@@ -278,6 +304,21 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario.
 Para ver el historial completo de cambios, consulta [CHANGELOG.md](./CHANGELOG.md).
 
 Para entender el sistema de versionamiento, consulta [VERSIONING.md](./VERSIONING.md).
+
+---
+
+## 📊 Estado del Proyecto
+
+| Métrica | Valor |
+|---------|-------|
+| Calculadoras funcionales | 4/4 ✅ |
+| Tests unitarios | 186 |
+| Tests E2E | 117 |
+| **Tests totales** | **303** |
+| HDUs completadas | 5/10 |
+| Fixes pendientes | 1 |
+| Versión actual | 0.5.1 |
+| Elementos en tabla | 74 (→ 118) |
 
 ---
 

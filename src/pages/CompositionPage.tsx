@@ -111,9 +111,9 @@ export const CompositionPage = () => {
               <Button
                 variant="ghost"
                 onClick={clear}
-                className="flex items-center gap-2"
+                icon={<Trash2 size={18} />}
               >
-                <Trash2 size={18} />
+                Limpiar
               </Button>
             )}
           </div>

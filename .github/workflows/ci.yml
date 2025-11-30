@@ -1,12 +1,13 @@
 # GitHub Actions - AtomPop CI Pipeline
-# Solo ejecuta build y tests unitarios
+# Solo ejecuta en Pull Requests hacia main (merge)
 # El deploy lo maneja Vercel automáticamente
 
 name: CI - Build & Test
 
 on:
-  push:
+  pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened]
 
 jobs:
   build-and-test:
@@ -44,4 +45,3 @@ jobs:
             echo "❌ Error - carpeta dist no encontrada"
             exit 1
           fi
-

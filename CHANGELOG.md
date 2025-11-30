@@ -10,7 +10,48 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Por Hacer
-- ¡Todas las HDUs completadas! 🎉
+- HDU-5: Balanceador de Ecuaciones Químicas
+- HDU-6: Calculadora de pH
+- HDU-7: Modo Oscuro/Claro
+- HDU-8: PWA
+- HDU-9: Exportar a PDF
+- HDU-10: Tabla Periódica 118 elementos
+- FIX-2: Botón de Tabla Periódica
+
+---
+
+## [0.5.1] - 2024-11-30
+
+### 🐛 FIX-1: Botón "Limpiar valores" con icono mal posicionado
+
+> **Tipo:** PATCH | **Rama:** `main`
+
+Corrección de bugs menores de UI y mejora en CI/CD.
+
+### 🔧 Corregido
+
+- **Botón "Limpiar valores"** ahora muestra el icono al lado del texto (no sobre)
+- Corregido en: ConverterPage, CompositionPage, EmpiricalPage (ambos modos)
+- Todos los botones usan la prop `icon` del componente Button correctamente
+- **Rutas SPA en Vercel:** Agregado `vercel.json` con rewrites para que las rutas directas funcionen (ej: `/conversor`, `/masa-molar`)
+
+### ✨ Mejorado
+
+- **CI/CD:** El workflow ahora solo se ejecuta en Pull Requests hacia main
+- Esto permite trabajar en ramas feature sin activar el CI en cada push
+- Los push directos a main no activan el workflow (solo merges vía PR)
+
+### 📁 Archivos Modificados
+- `.github/workflows/ci.yml` - Cambiado trigger de `push` a `pull_request`
+- `src/pages/ConverterPage.tsx` - Botón limpiar corregido
+- `src/pages/CompositionPage.tsx` - Botón limpiar corregido  
+- `src/pages/EmpiricalPage.tsx` - Ambos botones limpiar corregidos
+- `vercel.json` - **NUEVO** - Configuración de rewrites para SPA
+
+### 📋 Nueva Estructura HDUS
+- Creada carpeta `HDUS/fixes/` para tracking de bugs
+- Agregadas HDUs futuras (HDU-5 a HDU-10)
+- Actualizado roadmap en README.md
 
 ---
 

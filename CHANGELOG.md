@@ -10,9 +10,72 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Por Hacer
-- HDU-2: Conversor Moles/Gramos/Átomos
 - HDU-3: Composición Porcentual con gráficos
 - HDU-4: Fórmula Empírica y Molecular
+
+---
+
+## [0.3.0] - 2024-11-30
+
+### 🎉 HDU-2: Conversor Moles/Gramos/Partículas
+
+> **Tipo:** MINOR | **Rama:** `feature/hdu-2`
+
+Segunda calculadora funcional: conversión entre unidades químicas.
+
+### ✨ Agregado
+
+#### Funcionalidad Principal
+- **Conversor bidireccional** completamente funcional
+  - Escribir en cualquier campo actualiza los otros automáticamente
+  - Soporta Moles ↔ Gramos ↔ Partículas
+  - Validación de fórmula en tiempo real
+  - Masa molar visible como referencia
+
+#### Nueva Carpeta `src/features/converter/`
+- **`useConverter.ts`** - Hook principal con:
+  - Conversiones bidireccionales
+  - Sanitización de inputs (sin negativos)
+  - Soporte para notación científica (1e23)
+  - Estados: activeField, isValid, hasValues
+
+- **`ConverterInput.tsx`** - Input especializado:
+  - Estados visuales: "editando" vs "calculado"
+  - Colores por tipo (cyan, amber, purple)
+  - Animaciones Framer Motion
+  - Display de notación científica legible
+
+#### Mejoras en UI
+- Indicadores visuales claros de campo activo
+- Badges "editando" y "calculado"
+- Ejemplos clickeables (H2O, NaCl, C6H12O6, etc.)
+- Sección de fórmulas de referencia
+- Diseño responsive (móvil/tablet/desktop)
+
+#### Testing
+- **24 tests unitarios** para useConverter
+- **24 tests E2E** para el conversor
+- Total proyecto: **159 tests unitarios + 61 E2E**
+
+### 📁 Estructura de Archivos Nuevos
+
+```
+src/features/converter/
+├── useConverter.ts           # Hook principal
+├── useConverter.test.ts      # 24 tests
+├── ConverterInput.tsx        # Input especializado
+└── index.ts                  # Exports
+```
+
+### 📊 Métricas
+
+| Métrica | Valor |
+|---------|-------|
+| Tests unitarios nuevos | 24 |
+| Tests E2E nuevos | 24 |
+| Tests totales | 159 + 61 E2E |
+| Archivos creados | 4 |
+| Tickets completados | 7 |
 
 ---
 

@@ -1,10 +1,10 @@
 # 🧪 AtomPop - Calculadora de Química Educativa
 
-![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.2.1-amber?style=for-the-badge)
+![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.3.0-amber?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
-![Tests](https://img.shields.io/badge/Tests-148%20passing-22c55e?style=flat-square)
+![Tests](https://img.shields.io/badge/Tests-220%20passing-22c55e?style=flat-square)
 
 > **Una calculadora web de química amigable, visualmente atractiva y accesible para estudiantes**, inspirada en el estilo visual de "Lluvia de Hamburguesas" (Cloudy with a Chance of Meatballs).
 
@@ -28,7 +28,7 @@ La aplicación presenta una interfaz de "laboratorio divertido" con:
 | Módulo | Descripción | Estado |
 |--------|-------------|--------|
 | **Masa Molar** | Calcula la masa molar de cualquier compuesto con desglose | ✅ Funcional |
-| **Conversor** | Convierte entre moles, gramos y partículas | 🔧 UI Lista |
+| **Conversor** | Convierte entre moles, gramos y partículas | ✅ Funcional |
 | **Composición %** | Muestra porcentaje de masa de cada elemento | 🔧 UI Lista |
 | **Fórmula Empírica** | Calcula fórmulas empírica y molecular | 🔧 UI Lista |
 
@@ -255,7 +255,7 @@ const result = parseFormula('Ca(OH)2');
 
 - [x] **HDU-0:** Infraestructura y Motor Químico
 - [x] **HDU-1:** Calculadora de Masa Molar (funcionalidad completa)
-- [ ] **HDU-2:** Conversor Moles/Gramos/Átomos
+- [x] **HDU-2:** Conversor Moles/Gramos/Átomos (funcional)
 - [ ] **HDU-3:** Composición Porcentual con gráficos
 - [ ] **HDU-4:** Fórmula Empírica y Molecular
 
@@ -267,6 +267,7 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario.
 
 | Versión | Fecha | HDU | Descripción |
 |---------|-------|-----|-------------|
+| `0.3.0` | 2024-11-30 | HDU-2 | Conversor Moles/Gramos/Partículas, 159+61 tests |
 | `0.2.1` | 2024-11-30 | - | CI/CD, Cypress E2E (37 tests), Husky hooks |
 | `0.2.0` | 2024-11-29 | HDU-1 | Calculadora de Masa Molar funcional, 111 tests |
 | `0.1.0` | 2024-11-29 | HDU-0 | Infraestructura base, motor químico, 83 tests |

@@ -1,7 +1,8 @@
 # HDU-2: Conversor Moles/Gramos/Átomos
 
 > **Prioridad:** 🔴 Alta  
-> **Estado:** ⏳ Pendiente  
+> **Estado:** ✅ Completado  
+> **Fecha Completado:** 2024-11-30  
 > **Dependencias:** HDU-0 (completa)  
 > **Estimación:** 3-4 horas  
 > **Versión:** `0.3.0` (MINOR)

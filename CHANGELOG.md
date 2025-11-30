@@ -10,8 +10,76 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Por Hacer
-- HDU-3: Composición Porcentual con gráficos
 - HDU-4: Fórmula Empírica y Molecular
+
+---
+
+## [0.4.0] - 2024-11-30
+
+### 🎉 HDU-3: Composición Porcentual
+
+> **Tipo:** MINOR | **Rama:** `feature/hdu-3`
+
+Tercera calculadora funcional: visualización de composición porcentual con gráfico circular.
+
+### ✨ Agregado
+
+#### Funcionalidad Principal
+- **Composición Porcentual** con gráfico interactivo
+  - Gráfico circular (donut chart) con colores CPK
+  - Lista de elementos con barras de progreso
+  - Hover interactivo entre gráfico y lista
+  - Porcentajes precisos que suman 100%
+
+#### Nueva Carpeta `src/features/composition/`
+- **`useComposition.ts`** - Hook principal con:
+  - Validación de fórmula en tiempo real
+  - Cálculo de composición porcentual
+  - Estados: isValid, isCalculated, error
+
+- **`PieChart.tsx`** - Gráfico circular SVG:
+  - Segmentos animados con Framer Motion
+  - Hover para destacar elementos
+  - Centro con información dinámica
+  - Leyenda compacta
+
+- **`CompositionList.tsx`** - Lista detallada:
+  - Barras de progreso animadas
+  - Badge de elemento con color CPK
+  - Detalles de masa atómica
+  - Suma total de porcentajes
+
+#### Mejoras en UI
+- Animaciones de entrada escalonadas
+- Sincronización hover gráfico ↔ lista
+- Sección educativa "¿Cómo se calcula?"
+- Diseño responsive
+
+#### Testing
+- **15 tests unitarios** para useComposition
+- **25 tests E2E** para composición
+- Total proyecto: **165 tests unitarios + 86 E2E**
+
+### 📁 Estructura de Archivos Nuevos
+
+```
+src/features/composition/
+├── useComposition.ts         # Hook principal
+├── useComposition.test.ts    # 15 tests
+├── PieChart.tsx              # Gráfico circular
+├── CompositionList.tsx       # Lista con barras
+└── index.ts                  # Exports
+```
+
+### 📊 Métricas
+
+| Métrica | Valor |
+|---------|-------|
+| Tests unitarios nuevos | 15 |
+| Tests E2E nuevos | 25 |
+| Tests totales | 165 + 86 E2E |
+| Archivos creados | 5 |
+| Tickets completados | 6 |
 
 ---
 

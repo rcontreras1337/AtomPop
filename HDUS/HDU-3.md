@@ -1,7 +1,8 @@
 # HDU-3: Composición Porcentual
 
 > **Prioridad:** 🟡 Media  
-> **Estado:** ⏳ Pendiente  
+> **Estado:** ✅ Completado  
+> **Fecha Completado:** 2024-11-30  
 > **Dependencias:** HDU-0 (completa), HDU-1 (recomendado)  
 > **Estimación:** 2-3 horas  
 > **Versión:** `0.4.0` (MINOR)

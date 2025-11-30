@@ -1,0 +1,30 @@
+#!/bin/sh
+
+echo "🔍 Verificando antes del push..."
+
+# 1. Lint
+echo "📝 Ejecutando lint..."
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "❌ Error: Lint falló. Corrige los errores antes de hacer push."
+  exit 1
+fi
+
+# 2. Tests unitarios
+echo "🧪 Ejecutando tests unitarios..."
+npm run test:run
+if [ $? -ne 0 ]; then
+  echo "❌ Error: Tests fallaron. Corrige los tests antes de hacer push."
+  exit 1
+fi
+
+# 3. Build
+echo "🏗️ Verificando build..."
+npm run build
+if [ $? -ne 0 ]; then
+  echo "❌ Error: Build falló. Corrige los errores antes de hacer push."
+  exit 1
+fi
+
+echo "✅ Todas las verificaciones pasaron. Continuando con push..."
+

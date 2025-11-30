@@ -53,15 +53,16 @@ describe('HDU-0: Navegación e Infraestructura', () => {
       cy.contains('a', 'Masa Molar').click();
       cy.url().should('include', '/masa-molar');
       
-      // Click en el logo o "Inicio"
-      cy.contains('a', 'Inicio').click();
+      // Click en "Volver al inicio"
+      cy.contains('Volver al inicio').click();
       cy.url().should('eq', Cypress.config().baseUrl + '/');
     });
   });
 
   describe('Navegación desde tarjetas del Home', () => {
     it('debe navegar a Masa Molar desde la tarjeta', () => {
-      cy.contains('Masa Molar').parents('a, button, [role="link"]').first().click();
+      // Las tarjetas son links directos
+      cy.get('a[href="/masa-molar"]').first().click();
       cy.url().should('include', '/masa-molar');
     });
   });

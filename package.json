@@ -1,7 +1,7 @@
 {
   "name": "atompop",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -14,7 +14,9 @@
     "cypress": "cypress open",
     "cypress:run": "cypress run",
     "e2e": "cypress open",
-    "e2e:headless": "cypress run"
+    "e2e:headless": "cypress run",
+    "verify": "npm run lint && npm run test:run && npm run build",
+    "prepare": "husky"
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.1.17",
@@ -41,6 +43,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
+    "husky": "^9.1.7",
     "jsdom": "^27.2.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.17",

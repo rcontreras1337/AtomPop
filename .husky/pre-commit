@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "🔍 Verificando antes del commit..."
+
+# Solo lint rápido para commits
+npm run lint
+if [ $? -ne 0 ]; then
+  echo "❌ Error: Lint falló. Corrige los errores antes de hacer commit."
+  exit 1
+fi
+
+echo "✅ Lint OK. Continuando con commit..."

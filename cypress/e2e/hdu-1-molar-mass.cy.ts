@@ -88,16 +88,17 @@ describe('HDU-1: Calculadora de Masa Molar', () => {
   describe('Manejo de errores', () => {
     it('debe mostrar error para elemento inexistente', () => {
       cy.get('input[placeholder*="H2O"]').type('Xy');
-      cy.contains('button', 'Calcular').click();
-
-      // Debe mostrar algún mensaje de error
-      cy.get('body').should('contain.text', 'no existe').or('contain.text', 'inválid').or('contain.text', 'error');
+      
+      // Esperar validación (debounce)
+      cy.wait(400);
+      
+      // El botón debe estar deshabilitado por el error de validación
+      cy.contains('button', 'Calcular').should('be.disabled');
     });
 
-    it('debe mostrar error para fórmula vacía', () => {
-      cy.contains('button', 'Calcular').click();
-
-      cy.contains('Ingresa una fórmula').should('be.visible');
+    it('debe tener botón deshabilitado para fórmula vacía', () => {
+      // El botón debe estar deshabilitado cuando no hay fórmula
+      cy.contains('button', 'Calcular').should('be.disabled');
     });
 
     it('debe validar en tiempo real mientras escribe', () => {

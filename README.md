@@ -1,10 +1,10 @@
 # 🧪 AtomPop - Calculadora de Química Educativa
 
-![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.2.0-amber?style=for-the-badge)
+![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.2.1-amber?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
-![Tests](https://img.shields.io/badge/Tests-111%20passing-22c55e?style=flat-square)
+![Tests](https://img.shields.io/badge/Tests-148%20passing-22c55e?style=flat-square)
 
 > **Una calculadora web de química amigable, visualmente atractiva y accesible para estudiantes**, inspirada en el estilo visual de "Lluvia de Hamburguesas" (Cloudy with a Chance of Meatballs).
 
@@ -132,7 +132,7 @@ npm run e2e:headless
 |-------|------------|--------|
 | `hdu-0-navigation.cy.ts` | Navegación, responsive, menú | ✅ |
 | `hdu-1-molar-mass.cy.ts` | Calculadora completa | ✅ |
-| **Total E2E** | **30+** | ✅ |
+| **Total E2E** | **37** | ✅ |
 
 ---
 
@@ -187,6 +187,25 @@ src/
 | `npm run test:coverage` | Tests con reporte de cobertura |
 | `npm run e2e` | Abre Cypress UI para tests E2E |
 | `npm run e2e:headless` | Ejecuta tests E2E en modo headless |
+| `npm run verify` | **Lint + Tests + Build** (verificación completa) |
+
+---
+
+## 🔒 Git Hooks (Husky)
+
+El proyecto utiliza **Husky** para ejecutar verificaciones automáticas antes de commits y pushes:
+
+| Hook | Verificaciones |
+|------|----------------|
+| **pre-commit** | Lint (ESLint) |
+| **pre-push** | Lint + Tests unitarios + Build de producción |
+
+Esto asegura que:
+- ✅ No se hagan commits con errores de lint
+- ✅ No se haga push de código que no compile
+- ✅ No se haga push si los tests unitarios fallan
+
+> **Nota:** Los tests E2E **NO** se ejecutan en los hooks (son lentos). Ejecuta `npm run e2e` manualmente cuando necesites verificar la UI.
 
 ---
 
@@ -248,6 +267,7 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario.
 
 | Versión | Fecha | HDU | Descripción |
 |---------|-------|-----|-------------|
+| `0.2.1` | 2024-11-30 | - | CI/CD, Cypress E2E (37 tests), Husky hooks |
 | `0.2.0` | 2024-11-29 | HDU-1 | Calculadora de Masa Molar funcional, 111 tests |
 | `0.1.0` | 2024-11-29 | HDU-0 | Infraestructura base, motor químico, 83 tests |
 | `0.0.0` | 2024-11-29 | - | Init del proyecto con Vite + React + TS |

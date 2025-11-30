@@ -16,6 +16,55 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [0.2.1] - 2024-11-30
+
+### 🔧 CI/CD, Testing E2E y Git Hooks
+
+> **Tipo:** PATCH | **Rama:** `main`
+
+Configuración de infraestructura de CI/CD y testing E2E.
+
+### ✨ Agregado
+
+#### CI/CD (GitHub Actions + Vercel)
+- **GitHub Action** para CI en push a main
+  - Lint (ESLint)
+  - Tests unitarios (Vitest)
+  - Build de producción
+- **Deploy automático** con Vercel
+- **Dominio personalizado**: [atompop.info](https://atompop.info)
+
+#### Testing E2E (Cypress)
+- **Cypress 15** configurado
+- **37 tests E2E** implementados:
+  - `hdu-0-navigation.cy.ts` - 14 tests (navegación, responsive, menú)
+  - `hdu-1-molar-mass.cy.ts` - 23 tests (calculadora completa)
+- Fixtures con fórmulas de prueba
+- Comandos custom: `visitAndWait`, `enterFormula`, `clickCalculate`
+
+#### Git Hooks (Husky)
+- **pre-commit**: Ejecuta lint
+- **pre-push**: Ejecuta lint + tests unitarios + build
+- Previene push de código que no compile o con tests fallando
+
+#### Scripts Nuevos
+- `npm run verify` - Lint + Tests + Build (verificación completa)
+- `npm run e2e` - Abre Cypress UI
+- `npm run e2e:headless` - Cypress en modo headless
+
+#### Tickets E2E agregados a HDUs
+- Todos los HDU (0-4) ahora incluyen tickets de tests E2E
+
+### 📊 Métricas
+
+| Métrica | Valor |
+|---------|-------|
+| Tests E2E nuevos | 37 |
+| Tests totales (unitarios + E2E) | 148 |
+| Archivos de configuración | 5 |
+
+---
+
 ## [0.2.0] - 2024-11-29
 
 ### 🎉 HDU-1: Calculadora de Masa Molar

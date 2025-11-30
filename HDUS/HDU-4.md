@@ -1,7 +1,8 @@
 # HDU-4: Fórmula Empírica y Molecular
 
 > **Prioridad:** 🟡 Media  
-> **Estado:** ⏳ Pendiente  
+> **Estado:** ✅ Completado  
+> **Fecha Completado:** 2024-11-30  
 > **Dependencias:** HDU-0 (completa)  
 > **Estimación:** 3-4 horas  
 > **Versión:** `0.5.0` (MINOR)
@@ -403,22 +404,22 @@ npm run e2e  # Abre Cypress UI (no headless)
 
 ## ✅ Checklist Final HDU-4
 
-- [ ] TICKET 4.1 completado
-- [ ] TICKET 4.2 completado
-- [ ] TICKET 4.3 completado
-- [ ] TICKET 4.4 completado
-- [ ] TICKET 4.5 completado
-- [ ] **TICKET 4.6 completado (Tests Unitarios)**
-- [ ] **TICKET 4.7 completado (Tests E2E)**
-- [ ] Modo 1 (Empírica) funciona correctamente
-- [ ] Modo 2 (Molecular) funciona correctamente
-- [ ] Pasos son educativos y correctos
-- [ ] Página accesible desde navegación
-- [ ] Funciona en móvil
-- [ ] Sin errores en consola
-- [ ] Todos los tests pasan (`npm run test:run`)
-- [ ] Tests E2E pasan (`npm run e2e`)
-- [ ] CHANGELOG.md actualizado
-- [ ] Versión actualizada a `0.5.0`
-- [ ] Commit realizado con tag `v0.5.0`
+- [x] TICKET 4.1 completado
+- [x] TICKET 4.2 completado
+- [x] TICKET 4.3 completado
+- [x] TICKET 4.4 completado
+- [x] TICKET 4.5 completado
+- [x] **TICKET 4.6 completado (Tests Unitarios)**
+- [x] **TICKET 4.7 completado (Tests E2E)**
+- [x] Modo 1 (Empírica) funciona correctamente
+- [x] Modo 2 (Molecular) funciona correctamente
+- [x] Pasos son educativos y correctos
+- [x] Página accesible desde navegación
+- [x] Funciona en móvil
+- [x] Sin errores en consola
+- [x] Todos los tests pasan (`npm run test:run`)
+- [x] Tests E2E pasan (`npm run e2e`)
+- [x] CHANGELOG.md actualizado
+- [x] Versión actualizada a `0.5.0`
+- [x] Commit realizado con tag `v0.5.0`
 

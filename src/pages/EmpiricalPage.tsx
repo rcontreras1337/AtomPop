@@ -1,9 +1,25 @@
 import { motion } from 'framer-motion';
-import { Atom, ArrowLeft, Plus, Trash2 } from 'lucide-react';
+import { Atom, ArrowLeft, Lightbulb, Trash2, AlertCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { 
+  useEmpiricalFormula, 
+  useMolecularFormula, 
+  ElementInputList, 
+  StepsDisplay 
+} from '../features/empirical';
+import { ChemicalInput } from '../components/ui/ChemicalInput';
+import { Button } from '../components/ui/Button';
+
+// ═══════════════════════════════════════════════════════════════
+// TIPOS
+// ═══════════════════════════════════════════════════════════════
 
 type Mode = 'empirical' | 'molecular';
+
+// ═══════════════════════════════════════════════════════════════
+// COMPONENTE PRINCIPAL
+// ═══════════════════════════════════════════════════════════════
 
 export const EmpiricalPage = () => {
   const [mode, setMode] = useState<Mode>('empirical');
@@ -25,13 +41,13 @@ export const EmpiricalPage = () => {
         </Link>
         
         <div className="flex items-center gap-4">
-          <div className="p-3 rounded-2xl bg-neon-purple/20 text-neon-purple">
+          <div className="p-3 rounded-2xl bg-purple-500/20 text-purple-400">
             <Atom className="w-8 h-8" />
           </div>
           <div>
             <h1 className="text-3xl md:text-4xl font-bold text-white">
-              Fórmula <span className="text-neon-purple">Empírica</span> y{' '}
-              <span className="text-neon-pink">Molecular</span>
+              Fórmula <span className="text-purple-400">Empírica</span> y{' '}
+              <span className="text-pink-400">Molecular</span>
             </h1>
             <p className="text-slate-400 mt-1">
               Calcula fórmulas desde porcentajes o datos experimentales
@@ -51,9 +67,10 @@ export const EmpiricalPage = () => {
           onClick={() => setMode('empirical')}
           className={`flex-1 py-3 px-6 rounded-xl font-bold transition-all ${
             mode === 'empirical'
-              ? 'bg-neon-purple text-white shadow-lg shadow-neon-purple/30'
-              : 'bg-lab-surface text-slate-400 hover:text-white'
+              ? 'bg-purple-500 text-white shadow-lg shadow-purple-500/30'
+              : 'bg-slate-800 text-slate-400 hover:text-white'
           }`}
+          data-testid="tab-empirical"
         >
           📊 Desde Porcentajes
         </button>
@@ -61,9 +78,10 @@ export const EmpiricalPage = () => {
           onClick={() => setMode('molecular')}
           className={`flex-1 py-3 px-6 rounded-xl font-bold transition-all ${
             mode === 'molecular'
-              ? 'bg-neon-pink text-white shadow-lg shadow-neon-pink/30'
-              : 'bg-lab-surface text-slate-400 hover:text-white'
+              ? 'bg-pink-500 text-white shadow-lg shadow-pink-500/30'
+              : 'bg-slate-800 text-slate-400 hover:text-white'
           }`}
+          data-testid="tab-molecular"
         >
           🧬 Desde Empírica
         </button>
@@ -82,161 +100,300 @@ export const EmpiricalPage = () => {
   );
 };
 
-// Modo 1: Calcular fórmula empírica desde porcentajes
+// ═══════════════════════════════════════════════════════════════
+// MODO 1: FÓRMULA EMPÍRICA DESDE PORCENTAJES
+// ═══════════════════════════════════════════════════════════════
+
 const EmpiricalMode = () => {
+  const {
+    elements,
+    addElement,
+    removeElement,
+    updateElement,
+    totalPercentage,
+    isValidTotal,
+    canCalculate,
+    validationError,
+    calculate,
+    result,
+    isCalculated,
+    clear,
+    loadExample,
+  } = useEmpiricalFormula();
+
   return (
-    <div className="card-glass p-6" style={{ borderColor: 'rgba(168, 85, 247, 0.3)' }}>
-      <h3 className="text-lg font-bold text-white mb-6">
-        Ingresa los elementos y sus porcentajes de masa
-      </h3>
-
-      {/* Lista de elementos */}
-      <div className="space-y-4 mb-6">
-        {/* Ejemplo de fila */}
-        <div className="flex items-center gap-4">
-          <select className="bg-lab-surface border border-lab-elevated rounded-xl px-4 py-3 
-                          text-white outline-none focus:border-neon-purple">
-            <option value="">Elemento</option>
-            <option value="C">C - Carbono</option>
-            <option value="H">H - Hidrógeno</option>
-            <option value="O">O - Oxígeno</option>
-            <option value="N">N - Nitrógeno</option>
-            <option value="S">S - Azufre</option>
-          </select>
-          <div className="flex-1 relative">
-            <input
-              type="number"
-              placeholder="0.00"
-              className="w-full bg-lab-surface border border-lab-elevated rounded-xl 
-                       px-4 py-3 text-white outline-none focus:border-neon-purple text-right pr-12"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500">%</span>
-          </div>
-          <button className="p-3 rounded-xl bg-danger/20 text-danger hover:bg-danger/30 transition-colors">
-            <Trash2 size={18} />
+    <div className="space-y-6">
+      <div className="card-glass p-6" style={{ borderColor: 'rgba(168, 85, 247, 0.3)' }}>
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-bold text-white">
+            Ingresa los elementos y sus porcentajes de masa
+          </h3>
+          <button
+            onClick={loadExample}
+            className="text-sm text-purple-400 hover:text-purple-300 flex items-center gap-1"
+          >
+            <Lightbulb size={14} />
+            Cargar ejemplo
           </button>
         </div>
 
-        {/* Segunda fila de ejemplo */}
-        <div className="flex items-center gap-4">
-          <select className="bg-lab-surface border border-lab-elevated rounded-xl px-4 py-3 
-                          text-white outline-none focus:border-neon-purple">
-            <option value="">Elemento</option>
-            <option value="C">C - Carbono</option>
-            <option value="H">H - Hidrógeno</option>
-            <option value="O">O - Oxígeno</option>
-          </select>
-          <div className="flex-1 relative">
-            <input
-              type="number"
-              placeholder="0.00"
-              className="w-full bg-lab-surface border border-lab-elevated rounded-xl 
-                       px-4 py-3 text-white outline-none focus:border-neon-purple text-right pr-12"
-            />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-500">%</span>
-          </div>
-          <button className="p-3 rounded-xl bg-danger/20 text-danger hover:bg-danger/30 transition-colors">
-            <Trash2 size={18} />
-          </button>
+        {/* Lista de elementos */}
+        <ElementInputList
+          elements={elements}
+          onAdd={addElement}
+          onRemove={removeElement}
+          onUpdate={updateElement}
+          totalPercentage={totalPercentage}
+          isValidTotal={isValidTotal}
+          canRemove={elements.length > 2}
+        />
+
+        {/* Error de validación */}
+        {validationError && (
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-4 p-3 rounded-lg bg-red-500/20 border border-red-500/30 flex items-center gap-2 text-red-400"
+          >
+            <AlertCircle size={18} />
+            <span>{validationError}</span>
+          </motion.div>
+        )}
+
+        {/* Botones */}
+        <div className="mt-6 flex gap-4 justify-center">
+          <Button
+            onClick={calculate}
+            disabled={!canCalculate}
+            className="flex items-center gap-2"
+          >
+            🧮 Calcular Fórmula Empírica
+          </Button>
+          
+          {(elements.some(e => e.symbol || e.percentage) || isCalculated) && (
+            <Button
+              variant="ghost"
+              onClick={clear}
+              className="flex items-center gap-2"
+            >
+              <Trash2 size={16} />
+              Limpiar
+            </Button>
+          )}
         </div>
       </div>
 
-      {/* Botón agregar */}
-      <button className="w-full py-3 border-2 border-dashed border-lab-elevated rounded-xl 
-                       text-slate-400 hover:border-neon-purple hover:text-neon-purple 
-                       transition-colors flex items-center justify-center gap-2">
-        <Plus size={18} />
-        Agregar elemento
-      </button>
+      {/* Resultado con pasos */}
+      {isCalculated && result && result.isValid && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="card-glass p-6"
+          style={{ borderColor: 'rgba(168, 85, 247, 0.3)' }}
+        >
+          <StepsDisplay steps={result.steps} finalFormula={result.formula} />
+        </motion.div>
+      )}
 
-      {/* Total */}
-      <div className="mt-6 p-4 bg-lab-surface/50 rounded-xl flex justify-between items-center">
-        <span className="text-slate-400">Total:</span>
-        <span className="text-2xl font-bold text-slate-500">0.00%</span>
-      </div>
-
-      {/* Botón calcular */}
-      <div className="mt-6 text-center">
-        <button className="btn-primary">
-          🧮 Calcular Fórmula Empírica
-        </button>
-      </div>
-
-      {/* Resultado placeholder */}
-      <div className="mt-8 result-display p-6 text-center">
-        <p className="text-slate-500 mb-2">Resultado</p>
-        <p className="text-4xl font-bold text-slate-600">?</p>
-      </div>
+      {/* Error de cálculo */}
+      {isCalculated && result && !result.isValid && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="p-6 rounded-xl bg-red-500/20 border border-red-500/30 text-center"
+        >
+          <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-400" />
+          <p className="text-red-400">{result.error}</p>
+        </motion.div>
+      )}
     </div>
   );
 };
 
-// Modo 2: Calcular fórmula molecular desde empírica
+// ═══════════════════════════════════════════════════════════════
+// MODO 2: FÓRMULA MOLECULAR DESDE EMPÍRICA
+// ═══════════════════════════════════════════════════════════════
+
 const MolecularMode = () => {
+  const {
+    empiricalFormula,
+    setEmpiricalFormula,
+    experimentalMass,
+    setExperimentalMass,
+    isValidFormula,
+    formulaError,
+    empiricalMass,
+    canCalculate,
+    calculate,
+    result,
+    isCalculated,
+    clear,
+    loadExample,
+  } = useMolecularFormula();
+
+  // Formatear fórmula con subíndices
+  const formatFormula = (formula: string): string => {
+    const subscripts: { [key: string]: string } = {
+      '0': '₀', '1': '₁', '2': '₂', '3': '₃', '4': '₄',
+      '5': '₅', '6': '₆', '7': '₇', '8': '₈', '9': '₉',
+    };
+    return formula.replace(/\d/g, (d) => subscripts[d] || d);
+  };
+
   return (
-    <div className="card-glass p-6" style={{ borderColor: 'rgba(236, 72, 153, 0.3)' }}>
-      <h3 className="text-lg font-bold text-white mb-6">
-        Calcula la fórmula molecular a partir de la empírica
-      </h3>
-
-      <div className="space-y-6">
-        {/* Input fórmula empírica */}
-        <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
-            Fórmula Empírica
-          </label>
-          <input
-            type="text"
-            placeholder="Ej: CH2O"
-            className="input-tube text-center text-xl"
-          />
-        </div>
-
-        {/* Input masa molar experimental */}
-        <div>
-          <label className="block text-sm font-medium text-slate-300 mb-2">
-            Masa Molar Experimental
-          </label>
-          <div className="relative">
-            <input
-              type="number"
-              placeholder="Ej: 180"
-              className="input-tube text-center text-xl pr-20"
-            />
-            <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500">
-              g/mol
-            </span>
-          </div>
-        </div>
-
-        {/* Botón calcular */}
-        <div className="text-center">
-          <button className="btn-primary" style={{ backgroundColor: '#ec4899' }}>
-            🧬 Calcular Fórmula Molecular
+    <div className="space-y-6">
+      <div className="card-glass p-6" style={{ borderColor: 'rgba(236, 72, 153, 0.3)' }}>
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-lg font-bold text-white">
+            Calcula la fórmula molecular a partir de la empírica
+          </h3>
+          <button
+            onClick={loadExample}
+            className="text-sm text-pink-400 hover:text-pink-300 flex items-center gap-1"
+          >
+            <Lightbulb size={14} />
+            Cargar ejemplo
           </button>
         </div>
 
-        {/* Info de cálculo */}
-        <div className="grid md:grid-cols-2 gap-4 text-center">
-          <div className="p-4 bg-lab-surface/50 rounded-xl">
-            <p className="text-slate-500 text-sm">Masa de Empírica</p>
-            <p className="text-xl font-bold text-slate-400">-- g/mol</p>
+        <div className="space-y-6">
+          {/* Input fórmula empírica */}
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">
+              Fórmula Empírica
+            </label>
+            <ChemicalInput
+              value={empiricalFormula}
+              onChange={setEmpiricalFormula}
+              placeholder="Ej: CH2O"
+              error={formulaError ?? undefined}
+              className="text-center text-xl"
+            />
+            
+            {/* Mostrar masa de empírica */}
+            {isValidFormula && empiricalMass && (
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="mt-2 text-sm text-center text-slate-400"
+              >
+                Masa de fórmula empírica: <span className="text-pink-400 font-bold">{empiricalMass.toFixed(3)} g/mol</span>
+              </motion.p>
+            )}
           </div>
-          <div className="p-4 bg-lab-surface/50 rounded-xl">
-            <p className="text-slate-500 text-sm">Multiplicador (n)</p>
-            <p className="text-xl font-bold text-slate-400">--</p>
-          </div>
-        </div>
 
-        {/* Resultado */}
-        <div className="result-display p-6 text-center">
-          <p className="text-slate-500 mb-2">Fórmula Molecular</p>
-          <p className="text-4xl font-bold text-slate-600">?</p>
+          {/* Input masa molar experimental */}
+          <div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">
+              Masa Molar Experimental
+            </label>
+            <div className="relative">
+              <input
+                type="text"
+                inputMode="decimal"
+                value={experimentalMass}
+                onChange={(e) => setExperimentalMass(e.target.value)}
+                placeholder="Ej: 180"
+                className="input-tube text-center text-xl pr-20"
+                data-testid="experimental-mass-input"
+              />
+              <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500">
+                g/mol
+              </span>
+            </div>
+          </div>
+
+          {/* Botones */}
+          <div className="flex gap-4 justify-center">
+            <Button
+              onClick={calculate}
+              disabled={!canCalculate}
+              className="flex items-center gap-2"
+              style={{ backgroundColor: canCalculate ? '#ec4899' : undefined }}
+            >
+              🧬 Calcular Fórmula Molecular
+            </Button>
+            
+            {(empiricalFormula || experimentalMass || isCalculated) && (
+              <Button
+                variant="ghost"
+                onClick={clear}
+                className="flex items-center gap-2"
+              >
+                <Trash2 size={16} />
+                Limpiar
+              </Button>
+            )}
+          </div>
         </div>
       </div>
+
+      {/* Resultado */}
+      {isCalculated && result && result.isValid && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="card-glass p-6"
+          style={{ borderColor: 'rgba(236, 72, 153, 0.3)' }}
+        >
+          {/* Info de cálculo */}
+          <div className="grid md:grid-cols-3 gap-4 mb-6">
+            <div className="p-4 bg-slate-800/50 rounded-xl text-center">
+              <p className="text-slate-500 text-sm mb-1">Masa Empírica</p>
+              <p className="text-xl font-bold text-purple-400">
+                {result.empiricalMass.toFixed(3)} g/mol
+              </p>
+            </div>
+            <div className="p-4 bg-slate-800/50 rounded-xl text-center">
+              <p className="text-slate-500 text-sm mb-1">Masa Experimental</p>
+              <p className="text-xl font-bold text-pink-400">
+                {result.experimentalMass.toFixed(3)} g/mol
+              </p>
+            </div>
+            <div className="p-4 bg-slate-800/50 rounded-xl text-center">
+              <p className="text-slate-500 text-sm mb-1">Multiplicador (n)</p>
+              <p className="text-xl font-bold text-cyan-400">
+                {result.multiplier}
+              </p>
+            </div>
+          </div>
+
+          {/* Explicación */}
+          <div className="mb-6 p-4 bg-slate-800/30 rounded-xl text-sm text-slate-400">
+            <p className="font-mono">
+              n = {result.experimentalMass.toFixed(2)} ÷ {result.empiricalMass.toFixed(2)} = {result.multiplier}
+            </p>
+            <p className="mt-2">
+              La fórmula molecular es {result.multiplier} veces la fórmula empírica
+            </p>
+          </div>
+
+          {/* Resultado final */}
+          <div className="p-6 rounded-xl bg-gradient-to-r from-pink-500/20 to-purple-500/20 border border-pink-500/30 text-center">
+            <p className="text-slate-400 mb-2">Fórmula Molecular</p>
+            <p className="text-4xl font-bold text-white" data-testid="molecular-result">
+              {formatFormula(result.molecularFormula)}
+            </p>
+            {result.molecularFormula === 'C6H12O6' && (
+              <p className="text-sm text-slate-400 mt-2">(Glucosa)</p>
+            )}
+          </div>
+        </motion.div>
+      )}
+
+      {/* Error de cálculo */}
+      {isCalculated && result && !result.isValid && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="p-6 rounded-xl bg-red-500/20 border border-red-500/30 text-center"
+        >
+          <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-400" />
+          <p className="text-red-400">{result.error}</p>
+        </motion.div>
+      )}
     </div>
   );
 };
 
 export default EmpiricalPage;
-

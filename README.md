@@ -1,10 +1,10 @@
 # 🧪 AtomPop - Calculadora de Química Educativa
 
-![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.4.0-amber?style=for-the-badge)
+![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.5.0-amber?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
-![Tests](https://img.shields.io/badge/Tests-251%20passing-22c55e?style=flat-square)
+![Tests](https://img.shields.io/badge/Tests-303%20passing-22c55e?style=flat-square)
 
 > **Una calculadora web de química amigable, visualmente atractiva y accesible para estudiantes**, inspirada en el estilo visual de "Lluvia de Hamburguesas" (Cloudy with a Chance of Meatballs).
 
@@ -30,7 +30,7 @@ La aplicación presenta una interfaz de "laboratorio divertido" con:
 | **Masa Molar** | Calcula la masa molar de cualquier compuesto con desglose | ✅ Funcional |
 | **Conversor** | Convierte entre moles, gramos y partículas | ✅ Funcional |
 | **Composición %** | Gráfico circular con porcentajes de masa | ✅ Funcional |
-| **Fórmula Empírica** | Calcula fórmulas empírica y molecular | 🔧 UI Lista |
+| **Fórmula Empírica** | Calcula fórmulas empírica y molecular | ✅ Funcional |
 
 ### Motor de Cálculo
 
@@ -257,7 +257,7 @@ const result = parseFormula('Ca(OH)2');
 - [x] **HDU-1:** Calculadora de Masa Molar (funcionalidad completa)
 - [x] **HDU-2:** Conversor Moles/Gramos/Átomos (funcional)
 - [x] **HDU-3:** Composición Porcentual con gráficos (funcional)
-- [ ] **HDU-4:** Fórmula Empírica y Molecular
+- [x] **HDU-4:** Fórmula Empírica y Molecular (funcional) ✅ **COMPLETADO**
 
 Ver carpeta `HDUS/` para detalles de cada historia de usuario.
 
@@ -267,6 +267,7 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario.
 
 | Versión | Fecha | HDU | Descripción |
 |---------|-------|-----|-------------|
+| `0.5.0` | 2024-11-30 | HDU-4 | Fórmula Empírica y Molecular, 186+117 tests |
 | `0.4.0` | 2024-11-30 | HDU-3 | Composición Porcentual con gráfico, 165+86 tests |
 | `0.3.0` | 2024-11-30 | HDU-2 | Conversor Moles/Gramos/Partículas, 159+61 tests |
 | `0.2.1` | 2024-11-30 | - | CI/CD, Cypress E2E (37 tests), Husky hooks |

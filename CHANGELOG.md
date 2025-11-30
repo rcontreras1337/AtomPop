@@ -10,7 +10,78 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 ## [Unreleased]
 
 ### Por Hacer
-- HDU-4: Fórmula Empírica y Molecular
+- ¡Todas las HDUs completadas! 🎉
+
+---
+
+## [0.5.0] - 2024-11-30
+
+### 🎉 HDU-4: Fórmula Empírica y Molecular
+
+> **Tipo:** MINOR | **Rama:** `feature/hdu-4`
+
+**¡ÚLTIMA HDU COMPLETADA!** Cuarta y última calculadora funcional: determinación de fórmulas empírica y molecular.
+
+### ✨ Agregado
+
+#### Funcionalidad Principal - Modo Empírica (desde %)
+- Lista dinámica de elementos (agregar/eliminar)
+- Selector de elementos con grupos organizados
+- Input de porcentajes con validación en tiempo real
+- Cálculo de total con indicador visual (99-101%)
+- Visualización paso a paso del cálculo
+- Resultado con fórmula formateada (subíndices)
+
+#### Funcionalidad Principal - Modo Molecular (desde Empírica)
+- Input de fórmula empírica con validación
+- Cálculo automático de masa de fórmula empírica
+- Input de masa molar experimental
+- Cálculo de multiplicador
+- Resultado con fórmula molecular
+
+#### Nueva Carpeta `src/features/empirical/`
+- **`useEmpiricalFormula.ts`** - Hook para modo 1:
+  - Gestión de lista de elementos dinámica
+  - Validación de porcentajes (~100%)
+  - Detección de duplicados
+  - Integración con calculateEmpiricalFormula
+
+- **`useMolecularFormula.ts`** - Hook para modo 2:
+  - Validación de fórmula empírica
+  - Cálculo de masa automático
+  - Integración con calculateMolecularFormula
+
+- **`ElementInputList.tsx`** - Lista de elementos:
+  - Selector con búsqueda
+  - Inputs de porcentaje
+  - Botones agregar/eliminar
+  - Total con validación visual
+
+- **`StepsDisplay.tsx`** - Visualización de pasos:
+  - Pasos expandibles/colapsables
+  - Animaciones de revelación
+  - Valores intermedios formatados
+
+#### Testing
+- **36 tests unitarios** para hooks de fórmula empírica/molecular
+- **31 tests E2E** para ambos modos
+
+### 📊 Métricas
+
+| Métrica | Valor |
+|---------|-------|
+| Tests unitarios nuevos | 36 |
+| Tests E2E nuevos | 31 |
+| **Tests totales** | **186 + 117 = 303** |
+| Archivos creados | 7 |
+
+### 🏆 Proyecto Completado
+
+¡AtomPop tiene ahora **4 calculadoras funcionales**!
+1. ✅ Masa Molar
+2. ✅ Conversor Moles/Gramos/Partículas
+3. ✅ Composición Porcentual
+4. ✅ Fórmula Empírica y Molecular
 
 ---
 

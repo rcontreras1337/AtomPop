@@ -5,15 +5,18 @@ import { FlaskConical, Atom, Beaker, TestTubes, Sparkles, Menu, X } from 'lucide
 import { useState } from 'react';
 import { routes } from '../router';
 
+// Datos estáticos para burbujas (generados una vez fuera del componente)
+const BUBBLE_DATA = Array.from({ length: 12 }, (_, i) => ({
+  id: i,
+  size: 10 + (i * 2.5) % 30,
+  left: (i * 8.3) % 100,
+  delay: (i * 0.8) % 10,
+  duration: 15 + (i * 0.8) % 10,
+}));
+
 // Componente de burbujas decorativas
 const Bubbles = () => {
-  const bubbles = Array.from({ length: 12 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 30 + 10,
-    left: Math.random() * 100,
-    delay: Math.random() * 10,
-    duration: Math.random() * 10 + 15,
-  }));
+  const bubbles = BUBBLE_DATA;
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">

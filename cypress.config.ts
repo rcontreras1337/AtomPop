@@ -8,7 +8,7 @@ export default defineConfig({
     video: true, // Grabar videos de los tests
     screenshotOnRunFailure: true,
     defaultCommandTimeout: 10000,
-    setupNodeEvents(on, config) {
+    setupNodeEvents() {
       // Implementar eventos de node aquí si es necesario
     },
   },

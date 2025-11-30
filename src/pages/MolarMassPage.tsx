@@ -1,8 +1,7 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useRef, useCallback, useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Beaker, ArrowLeft, Info, Copy, Check, Trash2, History, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 
 // Hooks y componentes
 import { useMolarMass } from '../features/molar-mass';
@@ -51,24 +50,21 @@ export const MolarMassPage = () => {
   } = useMolarMass();
 
   const [copied, setCopied] = useState(false);
-  const [validationError, setValidationError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Validación en tiempo real con debounce
   const debouncedFormula = useDebounce(formula, 300);
 
-  useEffect(() => {
+  // Calcular error de validación usando useMemo (no useEffect)
+  const validationError = useMemo(() => {
     if (!debouncedFormula.trim()) {
-      setValidationError(null);
-      return;
+      return null;
     }
-
     const parsed = parseFormula(debouncedFormula);
     if (!parsed.isValid) {
-      setValidationError(parsed.error || 'Fórmula inválida');
-    } else {
-      setValidationError(null);
+      return parsed.error || 'Fórmula inválida';
     }
+    return null;
   }, [debouncedFormula]);
 
   // Manejar submit con Enter
@@ -94,13 +90,13 @@ export const MolarMassPage = () => {
   }, [result]);
 
   // Usar una fórmula de ejemplo
-  const useExample = (exampleFormula: string) => {
+  const selectExample = (exampleFormula: string) => {
     setFormula(exampleFormula);
     inputRef.current?.focus();
   };
 
   // Usar una fórmula del historial
-  const useFromHistory = (historyItem: typeof history[0]) => {
+  const selectFromHistory = (historyItem: typeof history[0]) => {
     setFormula(historyItem.formula);
     inputRef.current?.focus();
   };
@@ -283,7 +279,7 @@ export const MolarMassPage = () => {
             {FORMULA_EXAMPLES.map(({ formula: f, name }) => (
               <motion.button
                 key={f}
-                onClick={() => useExample(f)}
+                onClick={() => selectExample(f)}
                 className="px-4 py-2 rounded-xl bg-lab-surface hover:bg-lab-elevated 
                          text-slate-300 hover:text-white transition-all text-sm
                          border border-white/5 hover:border-white/20"
@@ -314,7 +310,7 @@ export const MolarMassPage = () => {
                 {history.map((item, index) => (
                   <motion.button
                     key={`${item.formulaNormalized}-${index}`}
-                    onClick={() => useFromHistory(item)}
+                    onClick={() => selectFromHistory(item)}
                     className="px-3 py-2 rounded-xl bg-neon-green/10 hover:bg-neon-green/20 
                              border border-neon-green/20 hover:border-neon-green/40
                              transition-all text-sm group"

@@ -22,16 +22,5 @@ Cypress.Commands.add('clickCalculate', () => {
   cy.contains('button', 'Calcular').click();
 });
 
-// Declaraciones de tipos para los comandos personalizados
-declare global {
-  namespace Cypress {
-    interface Chainable {
-      visitAndWait(url: string): Chainable<void>;
-      enterFormula(formula: string): Chainable<void>;
-      clickCalculate(): Chainable<void>;
-    }
-  }
-}
-
-export {};
+// Tipos están en index.d.ts
 

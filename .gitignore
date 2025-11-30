@@ -30,6 +30,7 @@ cypress/downloads
 
 # Cursor AI (reglas locales - no subir al repo)
 .cursorrules
+.cursor/
 
 # Secrets y configuración local
 .env

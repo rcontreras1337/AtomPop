@@ -212,10 +212,21 @@ export const MainLayout: React.FC = () => {
       <footer className="relative z-10 mt-20 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            {/* Izquierda - Autor */}
             <div className="flex items-center gap-2 text-slate-500 text-sm">
               <FlaskConical size={16} className="text-neon-amber" />
-              <span>AtomPop/Ruben Contreras © 2025 — Hecho con 🧪 y ☕</span>
+              <span>AtomPop/Ruben Contreras © 2025</span>
             </div>
+            
+            {/* Centro - Versión */}
+            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/50 border border-slate-700/50">
+              <div className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
+              <span className="text-slate-400 text-sm font-mono">
+                v0.5.1
+              </span>
+            </div>
+            
+            {/* Derecha - Inspiración */}
             <div className="text-slate-600 text-xs">
               Inspirado en el laboratorio del Dr. Flint Lockwood
             </div>

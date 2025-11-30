@@ -214,7 +214,7 @@ export const MainLayout: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-slate-500 text-sm">
               <FlaskConical size={16} className="text-neon-amber" />
-              <span>AtomPop © 2024 — Hecho con 🧪 y ☕</span>
+              <span>AtomPop/Ruben Contreras © 2025 — Hecho con 🧪 y ☕</span>
             </div>
             <div className="text-slate-600 text-xs">
               Inspirado en el laboratorio del Dr. Flint Lockwood

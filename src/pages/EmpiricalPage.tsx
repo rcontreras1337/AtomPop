@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Atom, ArrowLeft, Lightbulb, Trash2, AlertCircle } from 'lucide-react';
+import { Atom, ArrowLeft, Lightbulb, Trash2, AlertCircle, AlertTriangle, Info } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { 
@@ -223,6 +223,8 @@ const MolecularMode = () => {
     formulaError,
     empiricalMass,
     canCalculate,
+    validationMessage,
+    suggestedMasses,
     calculate,
     result,
     isCalculated,
@@ -299,6 +301,69 @@ const MolecularMode = () => {
               <span className="absolute right-6 top-1/2 -translate-y-1/2 text-slate-500">
                 g/mol
               </span>
+            </div>
+            
+            {/* Advertencia cuando la masa es inválida */}
+            {experimentalMass && !canCalculate && validationMessage && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-3 p-4 rounded-xl bg-amber-500/10 border border-amber-500/30"
+                data-testid="validation-warning"
+              >
+                <div className="flex items-start gap-3">
+                  <AlertTriangle className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
+                  <div className="space-y-2">
+                    <p className="text-amber-300 text-sm font-medium">
+                      {validationMessage}
+                    </p>
+                    {suggestedMasses.length > 0 && (
+                      <div className="text-amber-400/80 text-sm">
+                        <span className="font-medium">💡 Valores válidos:</span>
+                        <div className="flex flex-wrap gap-2 mt-2">
+                          {suggestedMasses.slice(0, 4).map(({ n, mass }) => (
+                            <button
+                              key={n}
+                              onClick={() => setExperimentalMass(mass)}
+                              className="px-3 py-1.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 
+                                         text-amber-300 text-xs font-mono transition-colors"
+                            >
+                              {mass} g/mol (n={n})
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </div>
+          
+          {/* Sección educativa */}
+          <div className="p-4 bg-slate-800/30 rounded-xl border border-slate-700/50">
+            <h4 className="text-sm font-semibold text-slate-300 mb-3 flex items-center gap-2">
+              <Info size={16} className="text-pink-400" />
+              ¿Cómo funciona?
+            </h4>
+            <div className="text-sm text-slate-400 space-y-2">
+              <p>
+                La <strong className="text-white">fórmula molecular</strong> es un múltiplo entero 
+                de la <strong className="text-white">fórmula empírica</strong>.
+              </p>
+              <p className="font-mono bg-lab-surface/50 px-2 py-1 rounded inline-block text-pink-300">
+                n = Masa experimental ÷ Masa empírica
+              </p>
+              <p>
+                El multiplicador <strong className="text-white">n</strong> debe ser un número 
+                entero (1, 2, 3, 4...).
+              </p>
+              <div className="mt-2 p-2 bg-lab-surface/30 rounded-lg">
+                <span className="text-slate-500">Ejemplo:</span>{' '}
+                <span className="text-slate-300">
+                  CH₂O (30 g/mol) con 180 g/mol → n = 6 → C₆H₁₂O₆ (glucosa)
+                </span>
+              </div>
             </div>
           </div>
 
@@ -379,15 +444,23 @@ const MolecularMode = () => {
         </motion.div>
       )}
 
-      {/* Error de cálculo */}
+      {/* Error de cálculo - Mensaje educativo mejorado */}
       {isCalculated && result && !result.isValid && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="p-6 rounded-xl bg-red-500/20 border border-red-500/30 text-center"
+          className="p-6 rounded-xl bg-red-500/10 border border-red-500/30"
+          data-testid="calculation-error"
         >
-          <AlertCircle className="w-12 h-12 mx-auto mb-4 text-red-400" />
-          <p className="text-red-400">{result.error}</p>
+          <div className="flex items-start gap-4">
+            <AlertCircle className="w-8 h-8 text-red-400 shrink-0" />
+            <div className="space-y-3">
+              <h4 className="font-semibold text-red-400">El resultado no es válido</h4>
+              <div className="text-slate-300 text-sm whitespace-pre-line">
+                {result.error}
+              </div>
+            </div>
+          </div>
         </motion.div>
       )}
     </div>

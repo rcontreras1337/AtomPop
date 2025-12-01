@@ -476,10 +476,16 @@ export const calculateMolecularFormula = (
   
   // Calcular multiplicador
   const rawMultiplier = experimentalMass / empiricalMass;
-  const multiplier = Math.round(rawMultiplier);
   
-  // Verificar que el multiplicador sea razonable
-  if (Math.abs(rawMultiplier - multiplier) > 0.1) {
+  // Generar sugerencias de masas válidas
+  const generateSuggestions = (empMass: number, count: number = 6): string => {
+    return Array.from({ length: count }, (_, i) => 
+      `${(empMass * (i + 1)).toFixed(2)} g/mol (n=${i + 1})`
+    ).join(', ');
+  };
+  
+  // El multiplicador debe ser >= 1 (la molecular no puede ser menor que la empírica)
+  if (rawMultiplier < 0.95) {
     return {
       empiricalFormula: empiricalResult.formulaNormalized,
       molecularFormula: '',
@@ -488,7 +494,44 @@ export const calculateMolecularFormula = (
       experimentalMass,
       multiplier: rawMultiplier,
       isValid: false,
-      error: `El multiplicador (${rawMultiplier.toFixed(2)}) no es un entero. Verifica la masa molar experimental.`,
+      error: `La masa molar experimental (${experimentalMass} g/mol) es menor que la masa de la fórmula empírica (${empiricalMass.toFixed(2)} g/mol).
+
+La fórmula molecular no puede ser más pequeña que la fórmula empírica.
+
+💡 Valores válidos: ${generateSuggestions(empiricalMass, 4)}`,
+    };
+  }
+  
+  const multiplier = Math.round(rawMultiplier);
+  
+  // Verificar que el multiplicador redondeado sea cercano al valor real
+  // Tolerancia: 5% del multiplicador redondeado
+  const tolerance = 0.05;
+  if (Math.abs(rawMultiplier - multiplier) > tolerance) {
+    const lowerN = Math.floor(rawMultiplier);
+    const upperN = Math.ceil(rawMultiplier);
+    const lowerMass = (lowerN * empiricalMass).toFixed(2);
+    const upperMass = (upperN * empiricalMass).toFixed(2);
+    
+    return {
+      empiricalFormula: empiricalResult.formulaNormalized,
+      molecularFormula: '',
+      molecularFormulaFormatted: '',
+      empiricalMass,
+      experimentalMass,
+      multiplier: rawMultiplier,
+      isValid: false,
+      error: `El multiplicador n = ${experimentalMass} ÷ ${empiricalMass.toFixed(2)} = ${rawMultiplier.toFixed(2)}
+
+Para obtener una fórmula molecular válida, el multiplicador (n) debe ser un número entero (1, 2, 3...).
+
+💡 ¿Qué es el multiplicador?
+El multiplicador indica cuántas veces se repite la fórmula empírica en la molecular.
+Ejemplo: Si la empírica es CH₂O y n = 6, la molecular es C₆H₁₂O₆ (glucosa).
+
+💡 Masas válidas cercanas:
+• ${lowerMass} g/mol → n = ${lowerN}
+• ${upperMass} g/mol → n = ${upperN}`,
     };
   }
   

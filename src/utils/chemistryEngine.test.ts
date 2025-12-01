@@ -286,6 +286,77 @@ describe('chemistryEngine', () => {
       expect(result.isValid).toBe(false);
       expect(result.error).toContain('multiplicador');
     });
+
+    // ═══════════════════════════════════════════════════════════════
+    // TESTS FIX-3: Validación mejorada del multiplicador
+    // ═══════════════════════════════════════════════════════════════
+
+    describe('FIX-3: Validación del multiplicador', () => {
+      it('debe rechazar masa experimental menor a la empírica', () => {
+        // CH2O = 30.026 g/mol, masa experimental = 28 g/mol
+        const result = calculateMolecularFormula('CH2O', 28);
+        expect(result.isValid).toBe(false);
+        expect(result.error).toContain('menor que la masa');
+      });
+
+      it('debe rechazar masa experimental = 10 (mucho menor que empírica)', () => {
+        // CH2O = 30.026 g/mol, masa experimental = 10 g/mol
+        const result = calculateMolecularFormula('CH2O', 10);
+        expect(result.isValid).toBe(false);
+        expect(result.error).toContain('menor que la masa');
+      });
+
+      it('debe sugerir valores válidos en el mensaje de error (masa muy pequeña)', () => {
+        const result = calculateMolecularFormula('CH2O', 10);
+        expect(result.isValid).toBe(false);
+        expect(result.error).toContain('Valores válidos');
+        expect(result.error).toContain('g/mol');
+      });
+
+      it('debe mostrar mensaje educativo cuando multiplicador no es entero', () => {
+        // CH2O = 30.026 g/mol, masa experimental = 101 g/mol
+        // 101 / 30.026 = 3.36 (no es entero)
+        const result = calculateMolecularFormula('CH2O', 101);
+        expect(result.isValid).toBe(false);
+        expect(result.error).toContain('número entero');
+        expect(result.error).toContain('¿Qué es el multiplicador?');
+      });
+
+      it('debe sugerir masas válidas cercanas cuando multiplicador no es entero', () => {
+        const result = calculateMolecularFormula('CH2O', 101);
+        expect(result.isValid).toBe(false);
+        expect(result.error).toContain('Masas válidas cercanas');
+        // Debe sugerir n=3 y n=4
+        expect(result.error).toMatch(/n = 3/);
+        expect(result.error).toMatch(/n = 4/);
+      });
+
+      it('debe aceptar multiplicador exacto n=1', () => {
+        // CH2O = 30.026 g/mol, masa experimental ≈ 30.026 g/mol
+        const result = calculateMolecularFormula('CH2O', 30.026);
+        expect(result.isValid).toBe(true);
+        expect(result.multiplier).toBe(1);
+      });
+
+      it('debe aceptar multiplicador exacto n=2', () => {
+        // CH2O = 30.026 g/mol, masa experimental = 60.052 g/mol
+        const result = calculateMolecularFormula('CH2O', 60.052);
+        expect(result.isValid).toBe(true);
+        expect(result.multiplier).toBe(2);
+      });
+
+      it('debe aceptar multiplicador con pequeña tolerancia', () => {
+        // 180.156 es el valor exacto para n=6, probamos con 180
+        const result = calculateMolecularFormula('CH2O', 180);
+        expect(result.isValid).toBe(true);
+        expect(result.multiplier).toBe(6);
+      });
+
+      it('el rawMultiplier debe estar en el resultado para diagnóstico', () => {
+        const result = calculateMolecularFormula('CH2O', 101);
+        expect(result.multiplier).toBeCloseTo(3.36, 1);
+      });
+    });
   });
 
   // ═══════════════════════════════════════════════════════════════

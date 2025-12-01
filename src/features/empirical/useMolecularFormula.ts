@@ -10,6 +10,11 @@ import { parseFormula } from '../../utils/formulaParser';
 // TIPOS
 // ═══════════════════════════════════════════════════════════════
 
+export interface SuggestedMass {
+  n: number;
+  mass: string;
+}
+
 export interface UseMolecularFormulaReturn {
   // Inputs
   empiricalFormula: string;
@@ -22,6 +27,8 @@ export interface UseMolecularFormulaReturn {
   formulaError: string | null;
   empiricalMass: number | null;
   canCalculate: boolean;
+  validationMessage: string | null;
+  suggestedMasses: SuggestedMass[];
   
   // Cálculo
   calculate: () => void;
@@ -77,17 +84,35 @@ export const useMolecularFormula = (): UseMolecularFormulaReturn => {
     };
   }, [empiricalFormula]);
   
-  // Verificar si se puede calcular
-  const canCalculate = useMemo(() => {
-    if (!isValidFormula || empiricalMass === null) return false;
+  // Calcular masas sugeridas (primeros 6 múltiplos)
+  const suggestedMasses = useMemo((): SuggestedMass[] => {
+    if (!empiricalMass) return [];
+    return [1, 2, 3, 4, 5, 6].map(n => ({
+      n,
+      mass: (empiricalMass * n).toFixed(2)
+    }));
+  }, [empiricalMass]);
+  
+  // Verificar si se puede calcular y mensaje de validación
+  const { canCalculate, validationMessage } = useMemo(() => {
+    if (!isValidFormula || empiricalMass === null) {
+      return { canCalculate: false, validationMessage: null };
+    }
     
     const mass = parseFloat(experimentalMass);
-    if (isNaN(mass) || mass <= 0) return false;
+    if (isNaN(mass) || mass <= 0) {
+      return { canCalculate: false, validationMessage: null };
+    }
     
-    // La masa experimental debe ser mayor o igual a la empírica
-    if (mass < empiricalMass * 0.9) return false;
+    // La masa experimental debe ser >= masa empírica
+    if (mass < empiricalMass) {
+      return { 
+        canCalculate: false, 
+        validationMessage: `La masa experimental (${mass} g/mol) debe ser igual o mayor que la masa empírica (${empiricalMass.toFixed(2)} g/mol).`
+      };
+    }
     
-    return true;
+    return { canCalculate: true, validationMessage: null };
   }, [isValidFormula, empiricalMass, experimentalMass]);
   
   // Setters con reset de resultado
@@ -140,6 +165,8 @@ export const useMolecularFormula = (): UseMolecularFormulaReturn => {
     formulaError,
     empiricalMass,
     canCalculate,
+    validationMessage,
+    suggestedMasses,
     calculate,
     result,
     isCalculated,

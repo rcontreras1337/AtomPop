@@ -16,7 +16,79 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - HDU-8: PWA
 - HDU-9: Exportar a PDF
 - HDU-10: Tabla Periódica 118 elementos
-- FIX-2: Botón de Tabla Periódica
+
+---
+
+## [0.6.0] - 2024-12-01
+
+### 🎉 FIX-2: Tabla Periódica Interactiva
+
+> **Tipo:** MINOR | **Rama:** `fix/periodic-table`
+
+Nueva página y modal de Tabla Periódica con funcionalidad completa.
+
+### ✨ Agregado
+
+#### Página de Tabla Periódica (`/tabla-periodica`)
+- **Vista completa** de los 74 elementos disponibles
+- **Modo grid/lista** con toggle de vista
+- **Búsqueda** por nombre, símbolo o número atómico
+- **Filtrado** por categoría (metales, no metales, etc.)
+- **Panel de detalles** con información educativa al seleccionar
+- **Leyenda de categorías** interactiva
+- **Responsive** para móvil, tablet y desktop
+
+#### Modal de Tabla Periódica (PeriodicTableModal)
+- Modal reutilizable con overlay y blur
+- Grid de elementos con colores CPK
+- Hover para ver detalles rápidos
+- Callback `onSelect` para insertar elementos
+- Búsqueda y filtrado integrados
+
+#### Botón en ChemicalInput
+- Nueva prop `showPeriodicTableButton`
+- Callback `onPeriodicTableClick`
+- Integración con modal para insertar elementos
+
+#### Navegación
+- Nueva ruta `/tabla-periodica`
+- Enlace "Tabla" en navbar (icono Grid)
+- Accesible desde todas las páginas
+
+### 🧪 Testing
+- **67 tests nuevos** para los componentes de tabla periódica
+  - `PeriodicTableModal.test.tsx` - 21 tests
+  - `PeriodicTablePage.test.tsx` - 23 tests
+  - `ChemicalInput.test.tsx` - 23 tests (actualizado con tests del botón)
+
+### 📁 Archivos Creados/Modificados
+
+```
+src/
+├── components/ui/
+│   ├── PeriodicTableModal.tsx       # NUEVO
+│   ├── PeriodicTableModal.test.tsx  # NUEVO
+│   ├── ChemicalInput.tsx            # MODIFICADO (showPeriodicTableButton)
+│   ├── ChemicalInput.test.tsx       # NUEVO
+│   └── index.ts                     # MODIFICADO
+├── pages/
+│   ├── PeriodicTablePage.tsx        # NUEVO
+│   ├── PeriodicTablePage.test.tsx   # NUEVO
+│   └── index.ts                     # MODIFICADO
+├── layouts/
+│   └── MainLayout.tsx               # MODIFICADO (navbar)
+└── router.tsx                       # MODIFICADO (ruta)
+```
+
+### 📊 Métricas
+
+| Métrica | Valor |
+|---------|-------|
+| Tests nuevos | 67 |
+| **Tests totales** | **253 unitarios + 117 E2E = 370** |
+| Archivos creados | 4 |
+| Archivos modificados | 5 |
+| Tickets completados | 4 |
 
 ---
 

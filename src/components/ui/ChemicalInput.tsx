@@ -1,6 +1,6 @@
 import React, { forwardRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertCircle, CheckCircle } from 'lucide-react';
+import { AlertCircle, CheckCircle, Grid } from 'lucide-react';
 
 type InputStatus = 'idle' | 'valid' | 'error';
 
@@ -11,6 +11,10 @@ interface ChemicalInputProps extends Omit<React.InputHTMLAttributes<HTMLInputEle
   helperText?: string;
   onChange?: (value: string) => void;
   showStatusIcon?: boolean;
+  /** Mostrar botón para abrir tabla periódica */
+  showPeriodicTableButton?: boolean;
+  /** Callback cuando se hace clic en el botón de tabla periódica */
+  onPeriodicTableClick?: () => void;
 }
 
 export const ChemicalInput = forwardRef<HTMLInputElement, ChemicalInputProps>(({
@@ -20,6 +24,8 @@ export const ChemicalInput = forwardRef<HTMLInputElement, ChemicalInputProps>(({
   helperText,
   onChange,
   showStatusIcon = true,
+  showPeriodicTableButton = false,
+  onPeriodicTableClick,
   className = '',
   value,
   ...props
@@ -36,6 +42,14 @@ export const ChemicalInput = forwardRef<HTMLInputElement, ChemicalInputProps>(({
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(e.target.value);
+  };
+  
+  // Calcular padding derecho según los elementos presentes
+  const getRightPadding = () => {
+    let padding = 16; // Base padding (1rem)
+    if (showStatusIcon && status !== 'idle') padding += 32; // 2rem para el icono
+    if (showPeriodicTableButton) padding += 40; // 2.5rem para el botón
+    return `${padding}px`;
   };
   
   return (
@@ -57,32 +71,49 @@ export const ChemicalInput = forwardRef<HTMLInputElement, ChemicalInputProps>(({
           className={`
             input-tube
             ${statusClasses[status]}
-            ${showStatusIcon && status !== 'idle' ? 'pr-12' : ''}
             ${className}
           `}
+          style={{ paddingRight: getRightPadding() }}
           {...props}
         />
         
-        {/* Status icon */}
-        {showStatusIcon && (
-          <AnimatePresence>
-            {status !== 'idle' && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.8 }}
-                className="absolute right-4 top-1/2 -translate-y-1/2"
-              >
-                {status === 'valid' && (
-                  <CheckCircle className="w-5 h-5 text-neon-green" />
-                )}
-                {status === 'error' && (
-                  <AlertCircle className="w-5 h-5 text-danger" />
-                )}
-              </motion.div>
-            )}
-          </AnimatePresence>
-        )}
+        {/* Contenedor de iconos a la derecha */}
+        <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+          {/* Botón de tabla periódica */}
+          {showPeriodicTableButton && (
+            <motion.button
+              type="button"
+              onClick={onPeriodicTableClick}
+              className="p-1.5 rounded-lg bg-lab-elevated/50 hover:bg-neon-purple/20 
+                       text-slate-400 hover:text-neon-purple transition-all"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              title="Abrir Tabla Periódica"
+            >
+              <Grid className="w-4 h-4" />
+            </motion.button>
+          )}
+          
+          {/* Status icon */}
+          {showStatusIcon && (
+            <AnimatePresence>
+              {status !== 'idle' && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                >
+                  {status === 'valid' && (
+                    <CheckCircle className="w-5 h-5 text-neon-green" />
+                  )}
+                  {status === 'error' && (
+                    <AlertCircle className="w-5 h-5 text-danger" />
+                  )}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          )}
+        </div>
       </div>
       
       {/* Error message */}
@@ -113,4 +144,3 @@ export const ChemicalInput = forwardRef<HTMLInputElement, ChemicalInputProps>(({
 ChemicalInput.displayName = 'ChemicalInput';
 
 export default ChemicalInput;
-

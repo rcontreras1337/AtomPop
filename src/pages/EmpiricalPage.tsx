@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Atom, ArrowLeft, Lightbulb, Trash2, AlertCircle, AlertTriangle, Info } from 'lucide-react';
+import { Atom, ArrowLeft, Lightbulb, Trash2, AlertCircle, AlertTriangle, Info, Beaker } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { 
@@ -10,6 +10,7 @@ import {
 } from '../features/empirical';
 import { ChemicalInput } from '../components/ui/ChemicalInput';
 import { Button } from '../components/ui/Button';
+import { getCompoundInfo, getAlternativeFormulas } from '../data/compounds';
 
 // ═══════════════════════════════════════════════════════════════
 // TIPOS
@@ -437,10 +438,75 @@ const MolecularMode = () => {
             <p className="text-4xl font-bold text-white" data-testid="molecular-result">
               {formatFormula(result.molecularFormula)}
             </p>
-            {result.molecularFormula === 'C6H12O6' && (
-              <p className="text-sm text-slate-400 mt-2">(Glucosa)</p>
+            
+            {/* Nota de equivalencia si el orden cambió */}
+            {result.multiplier === 1 && result.molecularFormula !== empiricalFormula && (
+              <div className="mt-3 flex items-center justify-center gap-2 text-sm text-slate-400">
+                <div className="relative group">
+                  <Info size={14} className="text-slate-500 cursor-help" />
+                  <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 
+                                  bg-slate-800 rounded-lg text-sm text-slate-300 
+                                  opacity-0 group-hover:opacity-100 transition-opacity
+                                  w-64 text-left pointer-events-none z-10 shadow-lg">
+                    <p className="font-medium text-white mb-1">¿Por qué cambió el orden?</p>
+                    <p>Las fórmulas <strong>{formatFormula(empiricalFormula)}</strong> y{' '}
+                    <strong>{formatFormula(result.molecularFormula)}</strong> representan 
+                    la misma molécula. El orden de las letras es solo una convención de escritura.</p>
+                  </div>
+                </div>
+                <span>Equivalente a {formatFormula(empiricalFormula)}</span>
+              </div>
+            )}
+            
+            {/* Nombre del compuesto si es conocido */}
+            {getCompoundInfo(result.molecularFormula) && (
+              <p className="text-sm text-pink-300 mt-2">
+                ({getCompoundInfo(result.molecularFormula)?.name})
+              </p>
             )}
           </div>
+          
+          {/* Tarjeta informativa del compuesto */}
+          {getCompoundInfo(result.molecularFormula) && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="mt-4 p-4 bg-slate-800/30 rounded-xl border border-slate-700/50"
+              data-testid="compound-info"
+            >
+              <div className="flex items-start gap-3">
+                <Beaker className="w-5 h-5 text-neon-cyan shrink-0 mt-0.5" />
+                <div>
+                  <h4 className="font-medium text-white">
+                    {getCompoundInfo(result.molecularFormula)?.name}
+                  </h4>
+                  {getCompoundInfo(result.molecularFormula)?.iupac && (
+                    <p className="text-sm text-slate-400">
+                      IUPAC: {getCompoundInfo(result.molecularFormula)?.iupac}
+                    </p>
+                  )}
+                  {getCompoundInfo(result.molecularFormula)?.description && (
+                    <p className="text-sm text-slate-500 mt-1">
+                      {getCompoundInfo(result.molecularFormula)?.description}
+                    </p>
+                  )}
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {getCompoundInfo(result.molecularFormula)?.category && (
+                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-cyan-500/20 text-cyan-300">
+                        {getCompoundInfo(result.molecularFormula)?.category}
+                      </span>
+                    )}
+                    {getAlternativeFormulas(result.molecularFormula).length > 0 && (
+                      <span className="inline-block px-2 py-0.5 text-xs rounded-full bg-purple-500/20 text-purple-300">
+                        También: {getAlternativeFormulas(result.molecularFormula).map(f => formatFormula(f)).join(', ')}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          )}
         </motion.div>
       )}
 

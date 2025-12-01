@@ -282,5 +282,59 @@ describe('HDU-4: Fórmula Empírica y Molecular', () => {
       cy.get('footer').contains(/v\d+\.\d+\.\d+/).should('be.visible');
     });
   });
+
+  // ═══════════════════════════════════════════════════════════════
+  // TESTS FIX-4: Claridad en resultado de fórmula molecular
+  // ═══════════════════════════════════════════════════════════════
+
+  describe('FIX-4: Información de compuestos conocidos', () => {
+    beforeEach(() => {
+      cy.get('[data-testid="tab-molecular"]').click();
+    });
+
+    it('debe mostrar el nombre del compuesto para Glucosa', () => {
+      cy.get('input[placeholder*="CH2O"]').type('CH2O');
+      cy.get('[data-testid="experimental-mass-input"]').type('180');
+      cy.contains('button', 'Calcular Fórmula Molecular').click();
+      cy.contains('Glucosa').should('be.visible');
+    });
+
+    it('debe mostrar el nombre del compuesto para Formaldehído', () => {
+      cy.get('input[placeholder*="CH2O"]').type('CH2O');
+      cy.get('[data-testid="experimental-mass-input"]').type('30.026');
+      cy.contains('button', 'Calcular Fórmula Molecular').click();
+      cy.contains('Formaldehído').should('be.visible');
+    });
+
+    it('debe mostrar tarjeta informativa con categoría', () => {
+      cy.get('input[placeholder*="CH2O"]').type('CH2O');
+      cy.get('[data-testid="experimental-mass-input"]').type('180');
+      cy.contains('button', 'Calcular Fórmula Molecular').click();
+      cy.get('[data-testid="compound-info"]').should('be.visible');
+      cy.contains('Azúcar').should('be.visible');
+    });
+
+    it('debe mostrar nombre IUPAC cuando existe', () => {
+      cy.get('input[placeholder*="CH2O"]').type('CH2O');
+      cy.get('[data-testid="experimental-mass-input"]').type('30.026');
+      cy.contains('button', 'Calcular Fórmula Molecular').click();
+      cy.contains('Metanal').should('be.visible');
+    });
+
+    it('debe mostrar descripción educativa', () => {
+      cy.get('input[placeholder*="CH2O"]').type('CH2O');
+      cy.get('[data-testid="experimental-mass-input"]').type('180');
+      cy.contains('button', 'Calcular Fórmula Molecular').click();
+      cy.contains('energía').should('be.visible');
+    });
+
+    it('debe mostrar fórmulas alternativas para Formaldehído', () => {
+      cy.get('input[placeholder*="CH2O"]').type('CH2O');
+      cy.get('[data-testid="experimental-mass-input"]').type('30.026');
+      cy.contains('button', 'Calcular Fórmula Molecular').click();
+      // Debe mostrar las formas alternativas
+      cy.contains('También:').should('be.visible');
+    });
+  });
 });
 

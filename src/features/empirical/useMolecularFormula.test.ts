@@ -270,5 +270,86 @@ describe('useMolecularFormula', () => {
       expect(result.current.result).toBeNull();
     });
   });
+
+  // ═══════════════════════════════════════════════════════════════
+  // TESTS FIX-3: Validación mejorada y mensajes educativos
+  // ═══════════════════════════════════════════════════════════════
+
+  describe('FIX-3: Validación y sugerencias', () => {
+    it('debe mostrar validationMessage cuando masa < masa empírica', () => {
+      const { result } = renderHook(() => useMolecularFormula());
+      
+      act(() => {
+        result.current.setEmpiricalFormula('CH2O');
+        result.current.setExperimentalMass('28');
+      });
+      
+      expect(result.current.canCalculate).toBe(false);
+      expect(result.current.validationMessage).toBeTruthy();
+      expect(result.current.validationMessage).toContain('igual o mayor');
+    });
+
+    it('debe sugerir masas válidas', () => {
+      const { result } = renderHook(() => useMolecularFormula());
+      
+      act(() => {
+        result.current.setEmpiricalFormula('CH2O');
+      });
+      
+      expect(result.current.suggestedMasses).toHaveLength(6);
+      // Primer múltiplo: n=1 → 30.03 g/mol
+      expect(parseFloat(result.current.suggestedMasses[0].mass)).toBeCloseTo(30.026, 1);
+      expect(result.current.suggestedMasses[0].n).toBe(1);
+      // Segundo múltiplo: n=2 → 60.05 g/mol
+      expect(result.current.suggestedMasses[1].n).toBe(2);
+    });
+
+    it('no debe permitir calcular con masa muy pequeña', () => {
+      const { result } = renderHook(() => useMolecularFormula());
+      
+      act(() => {
+        result.current.setEmpiricalFormula('CH2O');
+        result.current.setExperimentalMass('10');
+      });
+      
+      expect(result.current.canCalculate).toBe(false);
+      expect(result.current.validationMessage).toBeTruthy();
+    });
+
+    it('no debe mostrar validationMessage con masa válida', () => {
+      const { result } = renderHook(() => useMolecularFormula());
+      
+      act(() => {
+        result.current.setEmpiricalFormula('CH2O');
+        result.current.setExperimentalMass('180');
+      });
+      
+      expect(result.current.canCalculate).toBe(true);
+      expect(result.current.validationMessage).toBeNull();
+    });
+
+    it('debe habilitar cálculo cuando masa >= masa empírica', () => {
+      const { result } = renderHook(() => useMolecularFormula());
+      
+      act(() => {
+        result.current.setEmpiricalFormula('CH2O');
+        result.current.setExperimentalMass('30.03');
+      });
+      
+      expect(result.current.canCalculate).toBe(true);
+    });
+
+    it('suggestedMasses debe estar vacío sin fórmula válida', () => {
+      const { result } = renderHook(() => useMolecularFormula());
+      
+      expect(result.current.suggestedMasses).toHaveLength(0);
+      
+      act(() => {
+        result.current.setEmpiricalFormula('InvalidFormula');
+      });
+      
+      expect(result.current.suggestedMasses).toHaveLength(0);
+    });
+  });
 });
 

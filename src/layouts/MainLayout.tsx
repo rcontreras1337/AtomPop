@@ -4,6 +4,7 @@ import { Outlet, Link, useLocation } from 'react-router-dom';
 import { FlaskConical, Atom, Beaker, TestTubes, Sparkles, Menu, X, Grid } from 'lucide-react';
 import { useState } from 'react';
 import { routes } from '../router';
+import { APP_VERSION } from '../config/version';
 
 // Datos estáticos para burbujas (generados una vez fuera del componente)
 const BUBBLE_DATA = Array.from({ length: 12 }, (_, i) => ({
@@ -223,7 +224,7 @@ export const MainLayout: React.FC = () => {
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/50 border border-slate-700/50">
               <div className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
               <span className="text-slate-400 text-sm font-mono">
-                v0.6.0
+                v{APP_VERSION}
               </span>
             </div>
             

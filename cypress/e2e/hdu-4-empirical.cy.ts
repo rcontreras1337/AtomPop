@@ -211,5 +211,76 @@ describe('HDU-4: Fórmula Empírica y Molecular', () => {
       cy.url().should('eq', Cypress.config().baseUrl + '/');
     });
   });
+
+  // ═══════════════════════════════════════════════════════════════
+  // TESTS FIX-3: Validación mejorada y mensajes educativos
+  // ═══════════════════════════════════════════════════════════════
+
+  describe('FIX-3: Validación de Fórmula Molecular', () => {
+    beforeEach(() => {
+      cy.get('[data-testid="tab-molecular"]').click();
+      cy.contains('Cargar ejemplo').click();
+    });
+
+    it('debe mostrar advertencia cuando masa < masa empírica', () => {
+      cy.get('[data-testid="experimental-mass-input"]').clear().type('28');
+      cy.get('[data-testid="validation-warning"]').should('be.visible');
+      cy.contains('igual o mayor').should('be.visible');
+    });
+
+    it('debe mostrar valores sugeridos clickeables', () => {
+      cy.get('[data-testid="experimental-mass-input"]').clear().type('10');
+      cy.contains('Valores válidos').should('be.visible');
+      cy.contains('g/mol (n=1)').should('be.visible');
+    });
+
+    it('debe permitir seleccionar un valor sugerido', () => {
+      cy.get('[data-testid="experimental-mass-input"]').clear().type('10');
+      // Hacer clic en la primera sugerencia (n=1)
+      cy.contains('button', '(n=1)').click();
+      // El input debe actualizarse con el valor sugerido
+      cy.get('[data-testid="experimental-mass-input"]').invoke('val').should('match', /30/);
+    });
+
+    it('debe mostrar error educativo con multiplicador no entero', () => {
+      cy.get('[data-testid="experimental-mass-input"]').clear().type('101');
+      cy.contains('button', 'Calcular Fórmula Molecular').click();
+      cy.get('[data-testid="calculation-error"]').should('be.visible');
+      cy.contains('número entero').should('be.visible');
+      cy.contains('¿Qué es el multiplicador?').should('be.visible');
+    });
+
+    it('debe sugerir masas válidas cercanas en el error', () => {
+      cy.get('[data-testid="experimental-mass-input"]').clear().type('101');
+      cy.contains('button', 'Calcular Fórmula Molecular').click();
+      cy.contains('Masas válidas cercanas').should('be.visible');
+      cy.contains('n = 3').should('be.visible');
+      cy.contains('n = 4').should('be.visible');
+    });
+
+    it('debe mostrar sección educativa "¿Cómo funciona?"', () => {
+      cy.contains('¿Cómo funciona?').should('be.visible');
+      cy.contains('múltiplo entero').should('be.visible');
+      cy.contains('n = Masa experimental ÷ Masa empírica').should('be.visible');
+    });
+
+    it('debe deshabilitar botón con masa inválida', () => {
+      cy.get('[data-testid="experimental-mass-input"]').clear().type('10');
+      cy.contains('button', 'Calcular Fórmula Molecular').should('be.disabled');
+    });
+
+    it('debe habilitar botón con masa válida', () => {
+      cy.get('[data-testid="experimental-mass-input"]').clear().type('180');
+      cy.contains('button', 'Calcular Fórmula Molecular').should('not.be.disabled');
+    });
+  });
+
+  describe('FIX-3: Versión dinámica en footer', () => {
+    it('debe mostrar la versión en el footer', () => {
+      cy.get('footer').should('contain', 'v');
+      // La versión debe ser un número de versión semántica
+      cy.get('footer').contains(/v\d+\.\d+\.\d+/).should('be.visible');
+    });
+  });
 });
 

@@ -10,7 +10,8 @@
 | ID | Nombre | Prioridad | Estado | Versión |
 |----|--------|-----------|--------|---------|
 | [FIX-1](./FIX-1.md) | Botón "Limpiar valores" con icono mal posicionado | 🟡 Media | ✅ Completado | 0.5.1 |
-| [FIX-2](./FIX-2.md) | Botón de Tabla Periódica sin Funcionalidad | 🔴 Alta | ⏳ Pendiente | 0.6.0 |
+| [FIX-2](./FIX-2.md) | Tabla Periódica Interactiva | 🔴 Alta | ✅ Completado | 0.6.0 |
+| [FIX-3](./FIX-3.md) | UX Confusa en Calculadora de Fórmula Molecular | 🔴 Alta | ✅ Completado | 0.6.1 |
 
 ---
 
@@ -37,9 +38,9 @@
 
 | Métrica | Valor |
 |---------|-------|
-| Total Fixes | 2 |
-| Pendientes | 1 |
-| Completados | 1 |
+| Total Fixes | 3 |
+| Pendientes | 0 |
+| Completados | 3 |
 | En Progreso | 0 |
 
 ---

@@ -19,7 +19,90 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
-## [0.6.0] - 2024-12-01
+## [0.6.1] - 2025-12-01
+
+### 🐛 FIX-3: UX Confusa y Lógica Incorrecta en Calculadora de Fórmula Molecular
+
+> **Tipo:** PATCH | **Rama:** `fix/molecular-ux`
+
+Corrección de bug de lógica y mejora de UX en la calculadora de fórmula molecular.
+
+### 🔧 Corregido
+
+#### Bug de Lógica Crítico
+- **El multiplicador 0.93 ya no se redondea incorrectamente a 1**
+- Agregada validación: el multiplicador debe ser >= 1 (la fórmula molecular no puede ser más pequeña que la empírica)
+- Tolerancia más estricta: 5% en lugar de 0.1 absoluto
+
+### ✨ Mejorado
+
+#### Mensajes Educativos
+- **Nuevo mensaje cuando masa < masa empírica**
+  - Explica por qué no es válido
+  - Muestra botones con valores sugeridos clickeables
+  
+- **Mensaje de error mejorado cuando multiplicador no es entero**
+  - Explica qué es el multiplicador
+  - Muestra el cálculo: `n = masa experimental ÷ masa empírica`
+  - Sugiere las masas válidas más cercanas (n-1 y n+1)
+
+#### Sección Educativa "¿Cómo funciona?"
+- Siempre visible en modo "Desde Empírica"
+- Explica el concepto de multiplicador
+- Incluye ejemplo: CH₂O → C₆H₁₂O₆
+
+#### Versión Dinámica en Footer
+- La versión ahora se lee automáticamente desde `package.json`
+- No más hardcoding de versión en `MainLayout.tsx`
+
+### 🧪 Testing
+
+#### Tests Unitarios Nuevos (15)
+- `chemistryEngine.test.ts` - 9 tests para validación de multiplicador
+- `useMolecularFormula.test.ts` - 6 tests para validationMessage y suggestedMasses
+
+#### Tests E2E Nuevos (10)
+- Tests para advertencia de masa inválida
+- Tests para valores sugeridos clickeables
+- Tests para mensajes educativos
+- Test para versión en footer
+
+### 📁 Archivos Modificados
+
+```
+src/
+├── utils/
+│   ├── chemistryEngine.ts          # Lógica de validación corregida
+│   └── chemistryEngine.test.ts     # 9 tests nuevos
+├── features/empirical/
+│   ├── useMolecularFormula.ts      # validationMessage, suggestedMasses
+│   └── useMolecularFormula.test.ts # 6 tests nuevos
+├── pages/
+│   └── EmpiricalPage.tsx           # Advertencia visual, sección educativa
+├── layouts/
+│   └── MainLayout.tsx              # Versión dinámica
+├── config/
+│   └── version.ts                  # NUEVO - Lee versión de package.json
+└── tsconfig.app.json               # resolveJsonModule: true
+
+cypress/e2e/
+└── hdu-4-empirical.cy.ts           # 10 tests E2E nuevos
+```
+
+### 📊 Métricas
+
+| Métrica | Valor |
+|---------|-------|
+| Tests unitarios nuevos | 15 |
+| Tests E2E nuevos | 10 |
+| **Tests totales** | **268 unitarios + 127 E2E = 395** |
+| Archivos creados | 1 |
+| Archivos modificados | 7 |
+| Tickets completados | 5 |
+
+---
+
+## [0.6.0] - 2025-12-01
 
 ### 🎉 FIX-2: Tabla Periódica Interactiva
 

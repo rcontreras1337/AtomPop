@@ -116,14 +116,16 @@ export const HomePage = () => {
             </motion.button>
           </Link>
           
-          <motion.button
-            className="btn-secondary flex items-center gap-3"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Atom className="w-5 h-5 text-neon-cyan" />
-            <span>Ver Tabla Periódica</span>
-          </motion.button>
+          <Link to="/tabla-periodica">
+            <motion.button
+              className="btn-secondary flex items-center gap-3"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Atom className="w-5 h-5 text-neon-cyan" />
+              <span>Ver Tabla Periódica</span>
+            </motion.button>
+          </Link>
         </motion.div>
 
         {/* Decoración flotante del hero */}

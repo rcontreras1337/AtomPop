@@ -19,6 +19,71 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ---
 
+## [0.6.2] - 2025-12-01
+
+### 🎓 FIX-4: Claridad en Resultado de Fórmula Molecular
+
+> **Tipo:** PATCH | **Rama:** `fix/molecular-clarity`
+
+Mejora educativa: el resultado ahora muestra información contextual del compuesto.
+
+### ✨ Agregado
+
+#### Base de datos de compuestos conocidos
+- **45+ compuestos** con nombres, IUPAC, categorías y descripciones
+- Incluye: agua, sales, ácidos, bases, alcoholes, azúcares, óxidos
+- Soporte para múltiples notaciones (CH2O = H2CO = HCHO)
+
+#### Información del compuesto en resultado
+- **Nombre común** (ej: "Formaldehído", "Glucosa")
+- **Nombre IUPAC** cuando existe (ej: "Metanal")
+- **Categoría** (ej: "Aldehído", "Azúcar", "Ácido Fuerte")
+- **Descripción educativa** breve
+
+#### Claridad en equivalencia de fórmulas
+- **Nota de equivalencia** cuando el orden de la fórmula cambia
+- **Tooltip explicativo** "¿Por qué cambió el orden?"
+- **Fórmulas alternativas** mostradas (ej: "También: H₂CO, HCHO")
+
+### 🧪 Testing
+
+#### Tests Unitarios Nuevos (30)
+- `compounds.test.ts` - Tests completos para la base de datos
+- Tests para `getCompoundName`, `getCompoundInfo`, `areFormulasEquivalent`
+
+#### Tests E2E Nuevos (6)
+- Tests para mostrar nombre de Glucosa
+- Tests para mostrar nombre de Formaldehído
+- Tests para categoría y descripción
+- Tests para fórmulas alternativas
+
+### 📁 Archivos Creados/Modificados
+
+```
+src/
+├── data/
+│   ├── compounds.ts           # NUEVO - Base de datos de compuestos
+│   └── compounds.test.ts      # NUEVO - 30 tests
+└── pages/
+    └── EmpiricalPage.tsx      # MODIFICADO - UI mejorada
+
+cypress/e2e/
+└── hdu-4-empirical.cy.ts      # MODIFICADO - 6 tests nuevos
+```
+
+### 📊 Métricas
+
+| Métrica | Valor |
+|---------|-------|
+| Compuestos en base de datos | 45+ |
+| Tests unitarios nuevos | 30 |
+| Tests E2E nuevos | 6 |
+| **Tests totales** | **298 unitarios + 133 E2E = 431** |
+| Archivos creados | 2 |
+| Archivos modificados | 2 |
+
+---
+
 ## [0.6.1] - 2025-12-01
 
 ### 🐛 FIX-3: UX Confusa y Lógica Incorrecta en Calculadora de Fórmula Molecular

@@ -1,10 +1,10 @@
 # 🧪 AtomPop - Calculadora de Química Educativa
 
-![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.6.1-amber?style=for-the-badge)
+![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.6.2-amber?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
-![Tests](https://img.shields.io/badge/Tests-395%20passing-22c55e?style=flat-square)
+![Tests](https://img.shields.io/badge/Tests-431%20passing-22c55e?style=flat-square)
 
 > **Una calculadora web de química amigable, visualmente atractiva y accesible para estudiantes**, inspirada en el estilo visual de "Lluvia de Hamburguesas" (Cloudy with a Chance of Meatballs).
 
@@ -296,6 +296,7 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario y `HDUS/fixes/` pa
 
 | Versión | Fecha | HDU | Descripción |
 |---------|-------|-----|-------------|
+| `0.6.2` | 2025-12-01 | FIX-4 | Info de compuestos conocidos, 45+ compuestos, 298+133 tests |
 | `0.6.1` | 2025-12-01 | FIX-3 | UX mejorada en Fórmula Molecular, mensajes educativos, 268+127 tests |
 | `0.6.0` | 2025-12-01 | FIX-2 | Tabla Periódica Interactiva, 253+117 tests |
 | `0.5.1` | 2025-11-30 | FIX-1 | Botón limpiar corregido, CI solo en PR |

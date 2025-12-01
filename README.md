@@ -1,10 +1,10 @@
 # 🧪 AtomPop - Calculadora de Química Educativa
 
-![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.5.1-amber?style=for-the-badge)
+![AtomPop Logo](https://img.shields.io/badge/AtomPop-v0.6.0-amber?style=for-the-badge)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=flat-square&logo=typescript)
 ![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=flat-square&logo=vite)
-![Tests](https://img.shields.io/badge/Tests-303%20passing-22c55e?style=flat-square)
+![Tests](https://img.shields.io/badge/Tests-370%20passing-22c55e?style=flat-square)
 
 > **Una calculadora web de química amigable, visualmente atractiva y accesible para estudiantes**, inspirada en el estilo visual de "Lluvia de Hamburguesas" (Cloudy with a Chance of Meatballs).
 
@@ -31,6 +31,7 @@ La aplicación presenta una interfaz de "laboratorio divertido" con:
 | **Conversor** | Convierte entre moles, gramos y partículas | ✅ Funcional |
 | **Composición %** | Gráfico circular con porcentajes de masa | ✅ Funcional |
 | **Fórmula Empírica** | Calcula fórmulas empírica y molecular | ✅ Funcional |
+| **Tabla Periódica** | Vista interactiva de 74 elementos con búsqueda y filtros | ✅ Funcional |
 
 ### Motor de Cálculo
 
@@ -129,7 +130,10 @@ npm run e2e:headless
 | `useComposition.ts` | 15 | ✅ |
 | `useEmpiricalFormula.ts` | 18 | ✅ |
 | `useMolecularFormula.ts` | 18 | ✅ |
-| **Total Unitarios** | **186** | ✅ |
+| `PeriodicTableModal.tsx` | 21 | ✅ |
+| `PeriodicTablePage.tsx` | 23 | ✅ |
+| `ChemicalInput.tsx` | 23 | ✅ |
+| **Total Unitarios** | **253** | ✅ |
 
 #### Tests E2E (Cypress)
 
@@ -273,7 +277,7 @@ const result = parseFormula('Ca(OH)2');
 ### 🐛 Fixes
 
 - [x] **FIX-1:** Botón "Limpiar valores" con icono mal posicionado ✅ (v0.5.1)
-- [ ] **FIX-2:** Botón de Tabla Periódica sin funcionalidad (v0.6.0)
+- [x] **FIX-2:** Página de Tabla Periódica Interactiva ✅ (v0.6.0)
 
 ### 🔮 Mejoras Futuras
 
@@ -292,14 +296,15 @@ Ver carpeta `HDUS/` para detalles de cada historia de usuario y `HDUS/fixes/` pa
 
 | Versión | Fecha | HDU | Descripción |
 |---------|-------|-----|-------------|
-| `0.5.1` | 2024-11-30 | FIX-1 | Botón limpiar corregido, CI solo en PR |
-| `0.5.0` | 2024-11-30 | HDU-4 | Fórmula Empírica y Molecular, 186+117 tests |
-| `0.4.0` | 2024-11-30 | HDU-3 | Composición Porcentual con gráfico, 165+86 tests |
-| `0.3.0` | 2024-11-30 | HDU-2 | Conversor Moles/Gramos/Partículas, 159+61 tests |
-| `0.2.1` | 2024-11-30 | - | CI/CD, Cypress E2E (37 tests), Husky hooks |
-| `0.2.0` | 2024-11-29 | HDU-1 | Calculadora de Masa Molar funcional, 111 tests |
-| `0.1.0` | 2024-11-29 | HDU-0 | Infraestructura base, motor químico, 83 tests |
-| `0.0.0` | 2024-11-29 | - | Init del proyecto con Vite + React + TS |
+| `0.6.0` | 2025-12-01 | FIX-2 | Tabla Periódica Interactiva, 253+117 tests |
+| `0.5.1` | 2025-11-30 | FIX-1 | Botón limpiar corregido, CI solo en PR |
+| `0.5.0` | 2025-11-30 | HDU-4 | Fórmula Empírica y Molecular, 186+117 tests |
+| `0.4.0` | 2025-11-30 | HDU-3 | Composición Porcentual con gráfico, 165+86 tests |
+| `0.3.0` | 2025-11-30 | HDU-2 | Conversor Moles/Gramos/Partículas, 159+61 tests |
+| `0.2.1` | 2025-11-30 | - | CI/CD, Cypress E2E (37 tests), Husky hooks |
+| `0.2.0` | 2025-11-29 | HDU-1 | Calculadora de Masa Molar funcional, 111 tests |
+| `0.1.0` | 2025-11-29 | HDU-0 | Infraestructura base, motor químico, 83 tests |
+| `0.0.0` | 2025-11-29 | - | Init del proyecto con Vite + React + TS |
 
 Para ver el historial completo de cambios, consulta [CHANGELOG.md](./CHANGELOG.md).
 
@@ -312,12 +317,13 @@ Para entender el sistema de versionamiento, consulta [VERSIONING.md](./VERSIONIN
 | Métrica | Valor |
 |---------|-------|
 | Calculadoras funcionales | 4/4 ✅ |
-| Tests unitarios | 186 |
+| Tabla Periódica | ✅ Funcional |
+| Tests unitarios | 253 |
 | Tests E2E | 117 |
-| **Tests totales** | **303** |
+| **Tests totales** | **370** |
 | HDUs completadas | 5/10 |
-| Fixes pendientes | 1 |
-| Versión actual | 0.5.1 |
+| Fixes completados | 2 |
+| Versión actual | 0.6.0 |
 | Elementos en tabla | 74 (→ 118) |
 
 ---

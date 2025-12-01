@@ -5,7 +5,8 @@ import {
   MolarMassPage, 
   ConverterPage, 
   CompositionPage, 
-  EmpiricalPage 
+  EmpiricalPage,
+  PeriodicTablePage,
 } from './pages';
 
 // Definición de rutas de la aplicación
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
         path: 'formula-empirica',
         element: <EmpiricalPage />,
       },
+      {
+        path: 'tabla-periodica',
+        element: <PeriodicTablePage />,
+      },
     ],
   },
 ]);
@@ -45,6 +50,7 @@ export const routes = {
   converter: '/conversor',
   composition: '/composicion',
   empirical: '/formula-empirica',
+  periodicTable: '/tabla-periodica',
 } as const;
 
 // Información de cada ruta para el menú
@@ -53,5 +59,6 @@ export const navItems = [
   { path: routes.converter, label: 'Conversor', icon: 'test-tubes' },
   { path: routes.composition, label: 'Composición', icon: 'sparkles' },
   { path: routes.empirical, label: 'Fórmulas', icon: 'atom' },
+  { path: routes.periodicTable, label: 'Tabla', icon: 'grid' },
 ] as const;
 

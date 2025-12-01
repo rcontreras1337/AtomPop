@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { FlaskConical, Atom, Beaker, TestTubes, Sparkles, Menu, X } from 'lucide-react';
+import { FlaskConical, Atom, Beaker, TestTubes, Sparkles, Menu, X, Grid } from 'lucide-react';
 import { useState } from 'react';
 import { routes } from '../router';
 
@@ -63,6 +63,7 @@ export const MainLayout: React.FC = () => {
     { path: routes.converter, label: 'Conversor', icon: TestTubes, color: 'text-neon-cyan' },
     { path: routes.composition, label: 'Composición', icon: Sparkles, color: 'text-neon-green' },
     { path: routes.empirical, label: 'Fórmulas', icon: Atom, color: 'text-neon-purple' },
+    { path: routes.periodicTable, label: 'Tabla', icon: Grid, color: 'text-slate-400' },
   ];
 
   return (
@@ -222,7 +223,7 @@ export const MainLayout: React.FC = () => {
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/50 border border-slate-700/50">
               <div className="w-2 h-2 rounded-full bg-neon-green animate-pulse" />
               <span className="text-slate-400 text-sm font-mono">
-                v0.5.1
+                v0.6.0
               </span>
             </div>
             
